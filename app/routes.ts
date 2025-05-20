@@ -110,4 +110,42 @@ export default [
       route("/:slug", "features/blog/screens/post.tsx"),
     ]),
   ]),
+
+  // layout("core/layouts/private.layout.tsx", { id: "private-user" }, [
+  //   // 일반 회원용 페이지
+  //   ...prefix("/counselors", [
+  //     index("features/counselors/screens/list.tsx"), // 상담사 목록
+  //     route(":id", "features/counselors/screens/detail.tsx"), // 상담사 상세
+  //   ]),
+  //   ...prefix("/products", [
+  //     index("features/products/screens/list.tsx"), // 상담 상품 목록
+  //     route(":id", "features/products/screens/detail.tsx"), // 상담 상품 상세
+  //   ]),
+  //   route("/letters/new/:counselorId", "features/letters/screens/new.tsx"), // 상담서 작성
+  //   ...prefix("/my", [
+  //     route("letters", "features/letters/screens/my-list.tsx"), // 내 상담서 목록
+  //     route("appointments", "features/appointments/screens/my-list.tsx"), // 내 예약 관리
+  //     route("profile", "features/users/screens/my-profile.tsx"), // 마이페이지
+  //     route("settings", "features/users/screens/settings.tsx"), // 계정 설정
+  //     route("payments", "features/payments/screens/my-payments.tsx"), // 결제 내역
+  //   ]),
+  //   route("/book/:productId", "features/appointments/screens/book-by-product.tsx"), // 상담 예약하기 (상품 기준)
+  //   route("/book/:counselorId", "features/appointments/screens/book-by-counselor.tsx"), // 상담 예약하기 (상담사 기준)
+  // ]),
+
+  // layout("core/layouts/private.layout.tsx", { id: "private-counselor" }, [
+  //   // 상담사용 페이지
+  //   ...prefix("/counselor", [
+  //     route("profile", "features/counselor/screens/profile.tsx"), // 상담사 프로필 등록/수정
+  //     route("products/new", "features/counselor/screens/products/new.tsx"), // 상담 상품 등록
+  //     route("products", "features/counselor/screens/products/list.tsx"), // 상담 상품 관리
+  //     route("products/:id/edit", "features/counselor/screens/products/edit.tsx"), // 상담 상품 수정
+  //     route("letters", "features/counselor/screens/letters/list.tsx"), // 받은 상담서 목록
+  //     route("letters/:id", "features/counselor/screens/letters/detail.tsx"), // 상담서 상세 및 답변
+  //     route("appointments", "features/counselor/screens/appointments.tsx"), // 예약 관리
+  //     route("schedule", "features/counselor/screens/schedule.tsx"), // 상담 일정 관리
+  //     route("earnings", "features/counselor/screens/earnings.tsx"), // 수익 관리
+  //     route("settings", "features/counselor/screens/settings.tsx"), // 상담사 설정
+  //   ]),
+  // ]),
 ] satisfies RouteConfig;

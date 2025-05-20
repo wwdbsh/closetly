@@ -173,33 +173,39 @@ export async function action({ request }: Route.ActionArgs) {
  */
 export default function Join({ actionData }: Route.ComponentProps) {
   // Reference to the form element for resetting after successful submission
-  const formRef = useRef<HTMLFormElement>(null);
+  // const formRef = useRef<HTMLFormElement>(null);
   
   // Reset the form when registration is successful
-  useEffect(() => {
-    if (actionData && "success" in actionData && actionData.success) {
-      formRef.current?.reset();
-      formRef.current?.blur();
-    }
-  }, [actionData]);
+  // useEffect(() => {
+  //   if (actionData && "success" in actionData && actionData.success) {
+  //     formRef.current?.reset();
+  //     formRef.current?.blur();
+  //   }
+  // }, [actionData]);
   return (
-    <div className="flex flex-col items-center justify-center gap-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="flex flex-col items-center">
-          <CardTitle className="text-2xl font-semibold" role="heading">
-            Create an account
+    <div className="flex-1 flex flex-col items-center gap-4 px-10 pt-30">
+      <Card
+        className="
+          w-full h-[400px] flex-shrink-0 rounded-[50px] bg-white shadow-[0_5px_30px_0_rgba(0,0,0,0.10)] border-none
+          flex flex-col justify-between
+          px-0 py-10
+        "
+      >
+        <CardHeader className="flex flex-col">
+          <CardTitle className="text-xl font-semibold" role="heading">
+            로그인
           </CardTitle>
           <CardDescription className="text-base">
-            Enter your details to create an account
+            SNS로 간편하게 로그인해보세요!
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
-          <Form
+          {/* <Form
             className="flex w-full flex-col gap-5"
             method="post"
             ref={formRef}
-          >
-            <div className="flex flex-col items-start space-y-2">
+          > */}
+            {/* <div className="flex flex-col items-start space-y-2">
               <Label htmlFor="name" className="flex flex-col items-start gap-1">
                 Name
               </Label>
@@ -215,8 +221,8 @@ export default function Join({ actionData }: Route.ComponentProps) {
               actionData.fieldErrors?.name ? (
                 <FormErrors errors={actionData.fieldErrors.name} />
               ) : null}
-            </div>
-            <div className="flex flex-col items-start space-y-2">
+            </div> */}
+            {/* <div className="flex flex-col items-start space-y-2">
               <Label
                 htmlFor="email"
                 className="flex flex-col items-start gap-1"
@@ -235,8 +241,8 @@ export default function Join({ actionData }: Route.ComponentProps) {
               actionData.fieldErrors?.email ? (
                 <FormErrors errors={actionData.fieldErrors.email} />
               ) : null}
-            </div>
-            <div className="flex flex-col items-start space-y-2">
+            </div> */}
+            {/* <div className="flex flex-col items-start space-y-2">
               <Label
                 htmlFor="password"
                 className="flex flex-col items-start gap-1"
@@ -258,8 +264,8 @@ export default function Join({ actionData }: Route.ComponentProps) {
               actionData.fieldErrors?.password ? (
                 <FormErrors errors={actionData.fieldErrors.password} />
               ) : null}
-            </div>
-            <div className="flex flex-col items-start space-y-2">
+            </div> */}
+            {/* <div className="flex flex-col items-start space-y-2">
               <Label
                 htmlFor="confirmPassword"
                 className="flex flex-col items-start gap-1"
@@ -278,19 +284,19 @@ export default function Join({ actionData }: Route.ComponentProps) {
               actionData.fieldErrors?.confirmPassword ? (
                 <FormErrors errors={actionData.fieldErrors.confirmPassword} />
               ) : null}
-            </div>
-            <FormButton label="Create account" className="w-full" />
-            {actionData && "error" in actionData && actionData.error ? (
+            </div> */}
+            {/* <FormButton label="Create account" className="w-full" /> */}
+            {/* {actionData && "error" in actionData && actionData.error ? (
               <FormErrors errors={[actionData.error]} />
-            ) : null}
+            ) : null} */}
 
-            <div className="flex items-center gap-2">
+            {/* <div className="flex items-center gap-2">
               <Checkbox id="marketing" name="marketing" />
               <Label htmlFor="marketing" className="text-muted-foreground">
                 Sign up for marketing emails
               </Label>
-            </div>
-            <div className="flex items-center gap-2">
+            </div> */}
+            {/* <div className="flex items-center gap-2">
               <Checkbox id="terms" name="terms" checked />
               <Label htmlFor="terms" className="text-muted-foreground">
                 <span>
@@ -312,8 +318,8 @@ export default function Join({ actionData }: Route.ComponentProps) {
                   </Link>
                 </span>
               </Label>
-            </div>
-            {actionData && "success" in actionData && actionData.success ? (
+            </div> */}
+            {/* {actionData && "success" in actionData && actionData.success ? (
               <Alert className="bg-green-600/20 text-green-700 dark:bg-green-950/20 dark:text-green-600">
                 <CheckCircle2Icon
                   className="size-4"
@@ -325,12 +331,12 @@ export default function Join({ actionData }: Route.ComponentProps) {
                   close this tab.
                 </AlertDescription>
               </Alert>
-            ) : null}
-          </Form>
+            ) : null} */}
+          {/* </Form> */}
           <SignUpButtons />
         </CardContent>
       </Card>
-      <div className="flex flex-col items-center justify-center text-sm">
+      {/* <div className="flex flex-col items-center justify-center text-sm">
         <p className="text-muted-foreground">
           Already have an account?{" "}
           <Link
@@ -342,7 +348,7 @@ export default function Join({ actionData }: Route.ComponentProps) {
             Sign in
           </Link>
         </p>
-      </div>
+      </div> */}
     </div>
   );
 }

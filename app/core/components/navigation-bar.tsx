@@ -130,19 +130,19 @@ function AuthButtons() {
   return (
     <>
       {/* Sign in button (less prominent) */}
-      <Button variant="ghost" asChild>
+      {/* <Button variant="ghost" asChild>
         <SheetClose asChild>
           <Link to="/login" viewTransition>
-            Sign in
+            로그인
           </Link>
         </SheetClose>
-      </Button>
+      </Button> */}
       
       {/* Sign up button (more prominent) */}
-      <Button variant="default" asChild>
+      <Button className="text-white" variant="ghost" asChild>
         <SheetClose asChild>
           <Link to="/join" viewTransition>
-            Sign up
+            로그인
           </Link>
         </SheetClose>
       </Button>
@@ -167,23 +167,23 @@ function Actions() {
   return (
     <>
       {/* Settings/debug dropdown menu */}
-      <DropdownMenu>
+      {/* <DropdownMenu>
         <DropdownMenuTrigger asChild className="cursor-pointer">
           <Button variant="ghost" size="icon">
             <CogIcon className="size-4" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+        <DropdownMenuContent align="end"> */}
           {/* Sentry monitoring link */}
-          <DropdownMenuItem asChild>
+          {/* <DropdownMenuItem asChild>
             <SheetClose asChild>
               <Link to="/debug/sentry" viewTransition>
                 Sentry
               </Link>
             </SheetClose>
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
           {/* Google Analytics link */}
-          <DropdownMenuItem asChild>
+          {/* <DropdownMenuItem asChild>
             <SheetClose asChild>
               <Link to="/debug/analytics" viewTransition>
                 Google Tag
@@ -191,13 +191,13 @@ function Actions() {
             </SheetClose>
           </DropdownMenuItem>
         </DropdownMenuContent>
-      </DropdownMenu>
+      </DropdownMenu> */}
       
       {/* Theme switcher component (light/dark mode) */}
       <ThemeSwitcher />
       
       {/* Language switcher component */}
-      <LangSwitcher />
+      {/* <LangSwitcher /> */}
     </>
   );
 }
@@ -241,46 +241,46 @@ export function NavigationBar({
   return (
     <nav
       className={
-        "mx-auto flex h-16 w-full items-center justify-between border-b px-5 shadow-xs backdrop-blur-lg transition-opacity md:px-10"
+        "w-full mx-auto flex bg-[#0C284F] items-center justify-between transition-opacity px-5 py-3"
       }
     >
-      <div className="mx-auto flex h-full w-full max-w-screen-2xl items-center justify-between py-3">
+      <div className="mx-auto flex h-full w-full max-w-screen-2xl items-center justify-between">
         {/* Application logo/title with link to home */}
         <Link to="/">
-          <h1 className="text-lg font-extrabold">{t("home.title")}</h1>
+          <h1 className="text-lg font-extrabold text-white">{t("home.title")}</h1>
         </Link>
         
         {/* Desktop navigation menu (hidden on mobile) */}
-        <div className="hidden h-full items-center gap-5 md:flex">
+        <div className="hidden h-full items-center gap-1 md:flex">
           {/* Main navigation links */}
-          <Link
+          {/* <Link
             to="/blog"
             viewTransition
             className="text-muted-foreground hover:text-foreground text-sm transition-colors"
           >
             Blog
-          </Link>
-          <Link
+          </Link> */}
+          {/* <Link
             to="/contact"
             viewTransition
             className="text-muted-foreground hover:text-foreground text-sm transition-colors"
           >
             Contact
-          </Link>
-          <Link
+          </Link> */}
+          {/* <Link
             to="/payments/checkout"
             viewTransition
             className="text-muted-foreground hover:text-foreground text-sm transition-colors"
           >
             Payments
-          </Link>
+          </Link> */}
           
-          <Separator orientation="vertical" />
+          {/* <Separator orientation="vertical" /> */}
           
           {/* Settings, theme switcher, and language switcher */}
-          <Actions />
+          {/* <Actions /> */}
           
-          <Separator orientation="vertical" />
+          {/* <Separator orientation="vertical" /> */}
           
           {/* Conditional rendering based on authentication state */}
           {loading ? (

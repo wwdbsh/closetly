@@ -39,20 +39,29 @@ function AuthLoginButton({
   logo,
   label,
   href,
+  className,
 }: {
   logo: React.ReactNode;
   label: string;
   href: string;
+  className?: string;
 }) {
   return (
     <Button
       variant="outline"
-      className="inline-flex items-center justify-center gap-2"
+      className={`
+        py-6
+        inline-flex
+        items-center
+        justify-center
+        gap-2
+        ${className}
+      `}
       asChild
     >
       <Link to={href}>
         <span>{logo}</span>
-        <span>Continue with {label}</span>
+        <span>{label}로 로그인</span>
       </Link>
     </Button>
   );
@@ -122,11 +131,17 @@ function SocialLoginButtons() {
   return (
     <>
       <AuthLoginButton
-        logo={<GoogleLogo className="size-4" />}
-        label="Google"
-        href="/auth/social/start/google"
+        logo={<KakaoLogo className="size-4 scale-125 dark:text-yellow-300" />}
+        label="카카오"
+        href="/auth/social/start/kakao"
+        className="bg-yellow-300 text-[#393939]"
       />
       <AuthLoginButton
+        logo={<GoogleLogo className="size-4" />}
+        label="구글"
+        href="/auth/social/start/google"
+      />
+      {/* <AuthLoginButton
         logo={<GithubLogo className="size-4 scale-125 dark:text-white" />}
         label="Github"
         href="/auth/social/start/github"
@@ -135,12 +150,7 @@ function SocialLoginButtons() {
         logo={<AppleLogo className="size-4 scale-150 dark:text-white" />}
         label="Apple"
         href="/auth/social/start/apple"
-      />
-      <AuthLoginButton
-        logo={<KakaoLogo className="size-4 scale-125 dark:text-yellow-300" />}
-        label="Kakao"
-        href="/auth/social/start/kakao"
-      />
+      /> */}
     </>
   );
 }
@@ -181,7 +191,7 @@ export function SignInButtons() {
 export function SignUpButtons() {
   return (
     <>
-      <Divider />
+      {/* <Divider /> */}
       <SocialLoginButtons />
     </>
   );

@@ -16,26 +16,26 @@ export async function loader({ request }: Route.LoaderArgs) {
 export default function NavigationLayout({ loaderData }: Route.ComponentProps) {
   const { userPromise } = loaderData;
   return (
-    <div className="flex min-h-screen flex-col justify-between">
-      <Suspense fallback={<NavigationBar loading={true} />}>
-        <Await resolve={userPromise}>
-          {({ data: { user } }) =>
-            user === null ? (
-              <NavigationBar loading={false} />
-            ) : (
-              <NavigationBar
-                name={user.user_metadata.name || "Anonymous"}
-                email={user.email}
-                avatarUrl={user.user_metadata.avatar_url}
-                loading={false}
-              />
-            )
-          }
-        </Await>
-      </Suspense>
-      <div className="mx-auto my-16 w-full max-w-screen-2xl px-5 md:my-32">
+    <div className="flex min-h-screen flex-col justify-between items-center bg-background">
+      <main className="w-full max-w-md sm:max-w-lg md:max-w-xl flex-1 bg-[#FAFAF8] shadow-md rounded-lg min-h-[80vh] flex flex-col">
+        <Suspense fallback={<NavigationBar loading={true} />}>
+          <Await resolve={userPromise}>
+            {({ data: { user } }) =>
+              user === null ? (
+                <NavigationBar loading={false} />
+              ) : (
+                <NavigationBar
+                  name={user.user_metadata.name || "Anonymous"}
+                  email={user.email}
+                  avatarUrl={user.user_metadata.avatar_url}
+                  loading={false}
+                />
+              )
+            }
+          </Await>
+        </Suspense>
         <Outlet />
-      </div>
+      </main>
       <Footer />
     </div>
   );
