@@ -21,14 +21,20 @@ export default function NavigationLayout({ loaderData }: Route.ComponentProps) {
         <Suspense fallback={<NavigationBar loading={true} />}>
           <Await resolve={userPromise}>
             {({ data: { user } }) =>
-              user === null ? (
+              // user === null ? (
+              user !== null ? (
                 <NavigationBar loading={false} />
               ) : (
                 <NavigationBar
-                  name={user.user_metadata.name || "Anonymous"}
-                  email={user.email}
-                  avatarUrl={user.user_metadata.avatar_url}
+                  name={'이상헌'}
+                  nickname={'도닥이'}
+                  email={'sangheonlee@gmail.com'}
+                  avatarUrl={'https://github.com/wwdbsh.png'}
                   loading={false}
+                  // name={user.user_metadata.name || "Anonymous"}
+                  // email={user.email}
+                  // avatarUrl={user.user_metadata.avatar_url}
+                  // loading={false}
                 />
               )
             }

@@ -16,7 +16,7 @@
  * - Authenticated state with user profile information
  * - Unauthenticated state with sign in/sign up buttons
  */
-import { CogIcon, HomeIcon, LogOutIcon, MenuIcon } from "lucide-react";
+import { CogIcon, HomeIcon, LogOutIcon, MenuIcon, MessageSquare } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 
@@ -61,10 +61,12 @@ import {
  */
 function UserMenu({
   name,
+  nickname,
   email,
   avatarUrl,
 }: {
   name: string;
+  nickname?: string;
   email?: string;
   avatarUrl?: string | null;
 }) {
@@ -72,7 +74,7 @@ function UserMenu({
     <DropdownMenu>
       {/* Avatar as the dropdown trigger */}
       <DropdownMenuTrigger asChild>
-        <Avatar className="size-8 cursor-pointer rounded-lg">
+        <Avatar className="size-8 cursor-pointer rounded-full">
           <AvatarImage src={avatarUrl ?? undefined} />
           <AvatarFallback>{name.slice(0, 2)}</AvatarFallback>
         </Avatar>
@@ -83,16 +85,16 @@ function UserMenu({
         {/* User information display */}
         <DropdownMenuLabel className="grid flex-1 text-left text-sm leading-tight">
           <span className="truncate font-semibold">{name}</span>
-          <span className="truncate text-xs">{email}</span>
+          <span className="truncate text-xs">@{nickname}</span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         
         {/* Dashboard link */}
         <DropdownMenuItem asChild>
           <SheetClose asChild>
-            <Link to="/dashboard" viewTransition>
-              <HomeIcon className="size-4" />
-              Dashboard
+            <Link to="/" viewTransition>
+              <MessageSquare className="size-4" />
+              상담내역
             </Link>
           </SheetClose>
         </DropdownMenuItem>
@@ -102,7 +104,7 @@ function UserMenu({
           <SheetClose asChild>
             <Link to="/logout" viewTransition>
               <LogOutIcon className="size-4" />
-              Log out
+              로그아웃
             </Link>
           </SheetClose>
         </DropdownMenuItem>
@@ -227,11 +229,13 @@ function Actions() {
 export function NavigationBar({
   name,
   email,
+  nickname,
   avatarUrl,
   loading,
 }: {
   name?: string;
   email?: string;
+  nickname?: string;
   avatarUrl?: string | null;
   loading: boolean;
 }) {
@@ -292,7 +296,7 @@ export function NavigationBar({
             <>
               {name ? (
                 // Authenticated state with user menu
-                <UserMenu name={name} email={email} avatarUrl={avatarUrl} />
+                <UserMenu name={name} nickname={nickname} email={email} avatarUrl={avatarUrl} />
               ) : (
                 // Unauthenticated state with auth buttons
                 <AuthButtons />

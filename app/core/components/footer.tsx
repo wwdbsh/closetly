@@ -25,7 +25,7 @@ import { Link } from "react-router";
 export default function Footer() {
   return (
     <footer className="text-muted-foreground mt-auto flex items-center justify-between border-t py-3 text-sm md:py-5">
-      <div className="mx-auto flex h-full w-full max-w-screen-2xl flex-col items-center justify-between gap-2.5 md:order-none md:flex-row md:gap-0">
+      <div className="mx-auto flex h-full w-full max-w-screen-2xl flex-col items-center justify-between gap-2.5 md:order-none md:flex-row md:gap-2.5">
         {/* Copyright notice - appears second on mobile, first on desktop */}
         <div className="order-2 md:order-none">
           <p>
@@ -35,12 +35,12 @@ export default function Footer() {
         </div>
         
         {/* Legal links - appears first on mobile, second on desktop */}
-        <div className="order-1 flex gap-10 *:underline md:order-none">
+        <div className="order-1 flex gap-2.5 *:underline md:order-none">
           <Link to="/legal/privacy-policy" viewTransition>
-            Privacy Policy
+            개인정보처리방침
           </Link>
           <Link to="/legal/terms-of-service" viewTransition>
-            Terms of Service
+            이용약관
           </Link>
         </div>
       </div>
