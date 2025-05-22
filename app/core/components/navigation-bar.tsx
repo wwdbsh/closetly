@@ -92,7 +92,7 @@ function UserMenu({
         {/* Dashboard link */}
         <DropdownMenuItem asChild>
           <SheetClose asChild>
-            <Link to="/" viewTransition>
+            <Link to="/my/messages" viewTransition>
               <MessageSquare className="size-4" />
               상담내역
             </Link>

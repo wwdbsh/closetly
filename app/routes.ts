@@ -101,6 +101,12 @@ export default [
         ]),
       ]),
     ]),
+    ...prefix("/my", [
+      ...prefix("/messages", [
+        index("features/users/screens/message-list-page.tsx"),
+        route("/:messageId", "features/users/screens/message-page.tsx"),
+      ])
+    ])
   ]),
 
   layout("core/layouts/private.layout.tsx", { id: "private-dashboard" }, [

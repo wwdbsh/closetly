@@ -67,6 +67,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
 const dummyData = [
   {
+    id: "1",
     image: "/ai-humans/human1.png",
     name: "홍길동",
     totalSessions: "2,000회",
@@ -79,6 +80,7 @@ const dummyData = [
     reviews: "780",
   },
   {
+    id: "2",
     image: "/ai-humans/human2.png",
     name: "김서윤",
     totalSessions: "1,842회",
@@ -91,6 +93,7 @@ const dummyData = [
     reviews: "58",
   },
   {
+    id: "3",
     image: "/ai-humans/human3.png",
     name: "이시연",
     totalSessions: "1,210회",
@@ -103,6 +106,7 @@ const dummyData = [
     reviews: "492",
   },
   {
+    id: "4",
     image: "/ai-humans/human4.png",
     name: "박준호",
     totalSessions: "1,117회",
@@ -115,6 +119,7 @@ const dummyData = [
     reviews: "39",
   },
   {
+    id: "5",
     image: "/ai-humans/human5.png",
     name: "김영호",
     totalSessions: "1,022회",
@@ -127,6 +132,7 @@ const dummyData = [
     reviews: "290",
   },
   {
+    id: "6",
     image: "/ai-humans/human6.png",
     name: "임하진",
     totalSessions: "830회",
@@ -164,7 +170,7 @@ export default function Home() {
   const { t } = useTranslation();
   
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col bg-[#FFF]">
       <h1
         className="
           text-[20px]
