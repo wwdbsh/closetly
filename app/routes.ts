@@ -104,7 +104,7 @@ export default [
     ...prefix("/my", [
       ...prefix("/messages", [
         index("features/users/screens/message-list-page.tsx"),
-        route("/:messageId", "features/users/screens/message-page.tsx"),
+        route("/:counselorId", "features/users/screens/message-page.tsx"),
       ])
     ])
   ]),

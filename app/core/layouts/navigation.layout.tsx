@@ -17,7 +17,7 @@ export default function NavigationLayout({ loaderData }: Route.ComponentProps) {
   const { userPromise } = loaderData;
   return (
     <div className="flex min-h-screen flex-col justify-between items-center bg-background">
-      <main className="w-full max-w-md sm:max-w-lg md:max-w-xl flex-1 bg-[#FAFAF8] shadow-md rounded-lg min-h-[80vh] flex flex-col">
+      <main className="w-full max-w-md sm:max-w-lg md:max-w-xl flex-1 bg-[#FFF] shadow-md rounded-lg min-h-[80vh] flex flex-col">
         <Suspense fallback={<NavigationBar loading={true} />}>
           <Await resolve={userPromise}>
             {({ data: { user } }) =>
