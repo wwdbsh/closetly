@@ -99,6 +99,7 @@ export default [
           route("/reviews", "features/counselors/screens/counselor-reviews-page.tsx"),
           route("/articles", "features/counselors/screens/counselor-articles-page.tsx"),
         ]),
+        route("/reservation", "features/counselors/screens/session-reservation-page.tsx"),
       ]),
     ]),
     ...prefix("/my", [

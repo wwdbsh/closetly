@@ -1,5 +1,5 @@
 import { StarIcon } from "lucide-react";
-import { NavLink, Outlet, useParams } from "react-router";
+import { Link, NavLink, Outlet, useParams } from "react-router";
 import { Button } from "~/core/components/ui/button";
 import { cn } from "~/core/lib/utils";
 
@@ -119,7 +119,9 @@ export default function CounselorOverviewLayout() {
       {/* 하단 버튼 */}
       <div className="flex gap-2 px-5 py-4 bg-white border-t border-gray-200">
         <Button variant="outline" className="flex-1 h-12 rounded-[10px] border border-[#393939] text-[#393939] font-bold">이전</Button>
-        <Button className="flex-4 h-12 rounded-[10px] bg-[#0C284F] text-white font-bold">예약하기</Button>
+        <Button className="flex-4 h-12 rounded-[10px] bg-[#0C284F] text-white font-bold" asChild>
+          <Link to={`/counselors/${counselorId}/reservation`}>바로 예약</Link>
+        </Button>
       </div>
     </div>
   )

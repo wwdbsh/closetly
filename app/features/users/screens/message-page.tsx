@@ -16,7 +16,7 @@ export default function MessagePage() {
     <div className="w-full min-h-screen flex flex-col overflow-hidden">
 
       {/* 상담사 정보 */}
-      <div className="flex items-center gap-3 px-5 py-4 bg-[#FAFAF8] border-b border-[#E8EBEE]">
+      <div className="flex items-center gap-3 px-5 py-4 bg-[#FFF] border-b border-[#E8EBEE]">
         <img
           src={message.counselor.avatar}
           alt={message.counselor.name}
