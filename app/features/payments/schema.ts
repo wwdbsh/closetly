@@ -8,17 +8,29 @@
  */
 import { sql } from "drizzle-orm";
 import {
-  doublePrecision,
+  bigint,
+  integer,
   jsonb,
+  pgEnum,
   pgPolicy,
   pgTable,
   text,
   timestamp,
   uuid,
+  varchar,
 } from "drizzle-orm/pg-core";
 import { authUid, authUsers, authenticatedRole } from "drizzle-orm/supabase";
+import { counselingApplications } from "../counselors/schema";
+import { users } from "../users/schema";
 
 import { makeIdentityColumn, timestamps } from "~/core/db/helpers.server";
+
+/**
+ * Payment Status Enum
+ * 
+ * Defines the possible statuses for a payment.
+ */
+export const paymentStatusEnum = pgEnum("payment_status", ["pending", "completed", "failed", "refund_processing", "refunded"]);
 
 /**
  * Payments Table
@@ -41,7 +53,7 @@ export const payments = pgTable(
     // Human-readable name for the order
     order_name: text().notNull(),
     // Total amount of the payment transaction
-    total_amount: doublePrecision().notNull(),
+    total_amount: bigint("total_amount", { mode: "bigint" }).notNull(),
     // Custom metadata about the payment (product details, etc.)
     metadata: jsonb().notNull(),
     // Complete raw response from the payment processor
@@ -49,18 +61,27 @@ export const payments = pgTable(
     // URL to the payment receipt provided by the processor
     receipt_url: text().notNull(),
     // Current status of the payment (e.g., "approved", "failed")
-    status: text().notNull(),
+    status: paymentStatusEnum("payment_status").notNull().default("pending"),
     // Foreign key to the user who made the payment
-    // Using CASCADE ensures payment records are deleted when user is deleted
-    user_id: uuid().references(() => authUsers.id, {
-      onDelete: "cascade",
-    }),
+    user_id: uuid("user_id").references(() => users.user_id, { onDelete: "restrict" }),
     // When the payment was approved by the processor
     approved_at: timestamp().notNull(),
     // When the payment was initially requested
-    requested_at: timestamp().notNull(),
+    requested_at: timestamp("requested_at", { withTimezone: true }).notNull().defaultNow(),
     // Adds created_at and updated_at timestamp columns
     ...timestamps,
+    // Unique identifier for the application
+    application_id: bigint("application_id", { mode: "bigint" }).notNull().unique().references(() => counselingApplications.application_id, { onDelete: "restrict" }),
+    // Payment method details
+    payment_method_detail: varchar("payment_method_detail", { length: 100 }),
+    // Unique identifier for the payment processor transaction
+    pg_transaction_id: varchar("pg_transaction_id", { length: 255 }).unique(),
+    // When the payment was completed
+    completed_at: timestamp("completed_at", { withTimezone: true }),
+    // When the refund was requested
+    refund_requested_at: timestamp("refund_requested_at", { withTimezone: true }),
+    // When the refund was completed
+    refund_completed_at: timestamp("refund_completed_at", { withTimezone: true }),
   },
   (table) => [
     // RLS Policy: Users can only view their own payment records
@@ -70,5 +91,8 @@ export const payments = pgTable(
       as: "permissive",
       using: sql`${authUid} = ${table.user_id}`,
     }),
+    sql`CREATE INDEX idx_payments_application_id ON payments(application_id)`,
+    sql`CREATE INDEX idx_payments_user_id ON payments(user_id)`,
+    sql`CREATE INDEX idx_payments_status ON payments(status)`,
   ],
 );
