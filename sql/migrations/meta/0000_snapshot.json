@@ -1,592 +1,30 @@
 {
-  "id": "53d5942f-15b2-4780-aa15-473e30cccdd9",
+  "id": "0be35e2a-4635-4459-b05e-bb65a8b382a0",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.application_places": {
-      "name": "application_places",
+    "public.clients": {
+      "name": "clients",
       "schema": "",
       "columns": {
-        "application_id": {
-          "name": "application_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "place_category_id": {
-          "name": "place_category_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "application_places_application_id_counseling_applications_application_id_fk": {
-          "name": "application_places_application_id_counseling_applications_application_id_fk",
-          "tableFrom": "application_places",
-          "tableTo": "counseling_applications",
-          "columnsFrom": [
-            "application_id"
-          ],
-          "columnsTo": [
-            "application_id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
-        "application_places_place_category_id_place_categories_place_category_id_fk": {
-          "name": "application_places_place_category_id_place_categories_place_category_id_fk",
-          "tableFrom": "application_places",
-          "tableTo": "place_categories",
-          "columnsFrom": [
-            "place_category_id"
-          ],
-          "columnsTo": [
-            "place_category_id"
-          ],
-          "onDelete": "restrict",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {
-        "application_places_application_id_place_category_id_pk": {
-          "name": "application_places_application_id_place_category_id_pk",
-          "columns": [
-            "application_id",
-            "place_category_id"
-          ]
-        }
-      },
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.application_preferred_dates": {
-      "name": "application_preferred_dates",
-      "schema": "",
-      "columns": {
-        "preferred_date_id": {
-          "name": "preferred_date_id",
-          "type": "bigint",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "application_id": {
-          "name": "application_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "preferred_date": {
-          "name": "preferred_date",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "application_preferred_dates_application_id_counseling_applications_application_id_fk": {
-          "name": "application_preferred_dates_application_id_counseling_applications_application_id_fk",
-          "tableFrom": "application_preferred_dates",
-          "tableTo": "counseling_applications",
-          "columnsFrom": [
-            "application_id"
-          ],
-          "columnsTo": [
-            "application_id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.application_preferred_times": {
-      "name": "application_preferred_times",
-      "schema": "",
-      "columns": {
-        "preferred_time_id": {
-          "name": "preferred_time_id",
-          "type": "bigint",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "application_id": {
-          "name": "application_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "preferred_time": {
-          "name": "preferred_time",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "application_preferred_times_application_id_counseling_applications_application_id_fk": {
-          "name": "application_preferred_times_application_id_counseling_applications_application_id_fk",
-          "tableFrom": "application_preferred_times",
-          "tableTo": "counseling_applications",
-          "columnsFrom": [
-            "application_id"
-          ],
-          "columnsTo": [
-            "application_id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.application_situations": {
-      "name": "application_situations",
-      "schema": "",
-      "columns": {
-        "application_id": {
-          "name": "application_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "situation_category_id": {
-          "name": "situation_category_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "application_situations_application_id_counseling_applications_application_id_fk": {
-          "name": "application_situations_application_id_counseling_applications_application_id_fk",
-          "tableFrom": "application_situations",
-          "tableTo": "counseling_applications",
-          "columnsFrom": [
-            "application_id"
-          ],
-          "columnsTo": [
-            "application_id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
-        "application_situations_situation_category_id_situation_categories_situation_category_id_fk": {
-          "name": "application_situations_situation_category_id_situation_categories_situation_category_id_fk",
-          "tableFrom": "application_situations",
-          "tableTo": "situation_categories",
-          "columnsFrom": [
-            "situation_category_id"
-          ],
-          "columnsTo": [
-            "situation_category_id"
-          ],
-          "onDelete": "restrict",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {
-        "application_situations_application_id_situation_category_id_pk": {
-          "name": "application_situations_application_id_situation_category_id_pk",
-          "columns": [
-            "application_id",
-            "situation_category_id"
-          ]
-        }
-      },
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.application_symptoms": {
-      "name": "application_symptoms",
-      "schema": "",
-      "columns": {
-        "application_id": {
-          "name": "application_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "symptom_category_id": {
-          "name": "symptom_category_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "application_symptoms_application_id_counseling_applications_application_id_fk": {
-          "name": "application_symptoms_application_id_counseling_applications_application_id_fk",
-          "tableFrom": "application_symptoms",
-          "tableTo": "counseling_applications",
-          "columnsFrom": [
-            "application_id"
-          ],
-          "columnsTo": [
-            "application_id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
-        "application_symptoms_symptom_category_id_symptom_categories_symptom_category_id_fk": {
-          "name": "application_symptoms_symptom_category_id_symptom_categories_symptom_category_id_fk",
-          "tableFrom": "application_symptoms",
-          "tableTo": "symptom_categories",
-          "columnsFrom": [
-            "symptom_category_id"
-          ],
-          "columnsTo": [
-            "symptom_category_id"
-          ],
-          "onDelete": "restrict",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {
-        "application_symptoms_application_id_symptom_category_id_pk": {
-          "name": "application_symptoms_application_id_symptom_category_id_pk",
-          "columns": [
-            "application_id",
-            "symptom_category_id"
-          ]
-        }
-      },
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.counseling_applications": {
-      "name": "counseling_applications",
-      "schema": "",
-      "columns": {
-        "application_id": {
-          "name": "application_id",
-          "type": "bigint",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "client_user_id": {
-          "name": "client_user_id",
+        "client_id": {
+          "name": "client_id",
           "type": "uuid",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "counselor_user_id": {
-          "name": "counselor_user_id",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "selected_method_id": {
-          "name": "selected_method_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "applied_price_per_hour": {
-          "name": "applied_price_per_hour",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "age_group": {
-          "name": "age_group",
-          "type": "age_group_range",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "gender": {
-          "name": "gender",
-          "type": "gender_type",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "additional_details": {
-          "name": "additional_details",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "status": {
-          "name": "status",
-          "type": "application_status",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'pending_approval'"
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "counseling_applications_client_user_id_users_user_id_fk": {
-          "name": "counseling_applications_client_user_id_users_user_id_fk",
-          "tableFrom": "counseling_applications",
-          "tableTo": "users",
-          "columnsFrom": [
-            "client_user_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
-          "onDelete": "restrict",
-          "onUpdate": "no action"
-        },
-        "counseling_applications_counselor_user_id_users_user_id_fk": {
-          "name": "counseling_applications_counselor_user_id_users_user_id_fk",
-          "tableFrom": "counseling_applications",
-          "tableTo": "users",
-          "columnsFrom": [
-            "counselor_user_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
-          "onDelete": "restrict",
-          "onUpdate": "no action"
-        },
-        "counseling_applications_selected_method_id_counselor_available_methods_available_method_id_fk": {
-          "name": "counseling_applications_selected_method_id_counselor_available_methods_available_method_id_fk",
-          "tableFrom": "counseling_applications",
-          "tableTo": "counselor_available_methods",
-          "columnsFrom": [
-            "selected_method_id"
-          ],
-          "columnsTo": [
-            "available_method_id"
-          ],
-          "onDelete": "restrict",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.place_categories": {
-      "name": "place_categories",
-      "schema": "",
-      "columns": {
-        "place_category_id": {
-          "name": "place_category_id",
-          "type": "integer",
           "primaryKey": true,
           "notNull": true
         },
-        "name": {
-          "name": "name",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "place_categories_name_unique": {
-          "name": "place_categories_name_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.situation_categories": {
-      "name": "situation_categories",
-      "schema": "",
-      "columns": {
-        "situation_category_id": {
-          "name": "situation_category_id",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "situation_categories_name_unique": {
-          "name": "situation_categories_name_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.symptom_categories": {
-      "name": "symptom_categories",
-      "schema": "",
-      "columns": {
-        "symptom_category_id": {
-          "name": "symptom_category_id",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "symptom_categories_name_unique": {
-          "name": "symptom_categories_name_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.payments": {
-      "name": "payments",
-      "schema": "",
-      "columns": {
-        "payment_id": {
-          "name": "payment_id",
-          "type": "bigint",
-          "primaryKey": true,
-          "notNull": true,
-          "identity": {
-            "type": "always",
-            "name": "payments_payment_id_seq",
-            "schema": "public",
-            "increment": "1",
-            "startWith": "1",
-            "minValue": "1",
-            "maxValue": "9223372036854775807",
-            "cache": "1",
-            "cycle": false
-          }
-        },
-        "payment_key": {
-          "name": "payment_key",
+        "nickname": {
+          "name": "nickname",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "order_id": {
-          "name": "order_id",
+        "avatar_background_color": {
+          "name": "avatar_background_color",
           "type": "text",
           "primaryKey": false,
           "notNull": true
-        },
-        "order_name": {
-          "name": "order_name",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "total_amount": {
-          "name": "total_amount",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "metadata": {
-          "name": "metadata",
-          "type": "jsonb",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "raw_data": {
-          "name": "raw_data",
-          "type": "jsonb",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "receipt_url": {
-          "name": "receipt_url",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "payment_status": {
-          "name": "payment_status",
-          "type": "payment_status",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'pending'"
-        },
-        "user_id": {
-          "name": "user_id",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "approved_at": {
-          "name": "approved_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "requested_at": {
-          "name": "requested_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
         },
         "updated_at": {
           "name": "updated_at",
@@ -601,134 +39,64 @@
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
-        },
-        "application_id": {
-          "name": "application_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "payment_method_detail": {
-          "name": "payment_method_detail",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "pg_transaction_id": {
-          "name": "pg_transaction_id",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "completed_at": {
-          "name": "completed_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "refund_requested_at": {
-          "name": "refund_requested_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "refund_completed_at": {
-          "name": "refund_completed_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": false
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "payments_user_id_users_user_id_fk": {
-          "name": "payments_user_id_users_user_id_fk",
-          "tableFrom": "payments",
-          "tableTo": "users",
+        "clients_client_id_profiles_profile_id_fk": {
+          "name": "clients_client_id_profiles_profile_id_fk",
+          "tableFrom": "clients",
+          "tableTo": "profiles",
           "columnsFrom": [
-            "user_id"
+            "client_id"
           ],
           "columnsTo": [
-            "user_id"
+            "profile_id"
           ],
-          "onDelete": "restrict",
-          "onUpdate": "no action"
-        },
-        "payments_application_id_counseling_applications_application_id_fk": {
-          "name": "payments_application_id_counseling_applications_application_id_fk",
-          "tableFrom": "payments",
-          "tableTo": "counseling_applications",
-          "columnsFrom": [
-            "application_id"
-          ],
-          "columnsTo": [
-            "application_id"
-          ],
-          "onDelete": "restrict",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "payments_application_id_unique": {
-          "name": "payments_application_id_unique",
+        "clients_nickname_unique": {
+          "name": "clients_nickname_unique",
           "nullsNotDistinct": false,
           "columns": [
-            "application_id"
-          ]
-        },
-        "payments_pg_transaction_id_unique": {
-          "name": "payments_pg_transaction_id_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "pg_transaction_id"
+            "nickname"
           ]
         }
       },
       "policies": {
-        "select-payment-policy": {
-          "name": "select-payment-policy",
+        "edit-client-policy": {
+          "name": "edit-client-policy",
+          "as": "PERMISSIVE",
+          "for": "UPDATE",
+          "to": [
+            "authenticated"
+          ],
+          "using": "(select auth.uid()) = \"clients\".\"client_id\"",
+          "withCheck": "(select auth.uid()) = \"clients\".\"client_id\""
+        },
+        "delete-client-policy": {
+          "name": "delete-client-policy",
+          "as": "PERMISSIVE",
+          "for": "DELETE",
+          "to": [
+            "authenticated"
+          ],
+          "using": "(select auth.uid()) = \"clients\".\"client_id\""
+        },
+        "select-client-policy": {
+          "name": "select-client-policy",
           "as": "PERMISSIVE",
           "for": "SELECT",
           "to": [
             "authenticated"
           ],
-          "using": "(select auth.uid()) = \"payments\".\"user_id\""
+          "using": "(select auth.uid()) = \"clients\".\"client_id\""
         }
       },
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.clients": {
-      "name": "clients",
-      "schema": "",
-      "columns": {
-        "client_user_id": {
-          "name": "client_user_id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "clients_client_user_id_users_user_id_fk": {
-          "name": "clients_client_user_id_users_user_id_fk",
-          "tableFrom": "clients",
-          "tableTo": "users",
-          "columnsFrom": [
-            "client_user_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
     },
@@ -738,7 +106,7 @@
       "columns": {
         "article_id": {
           "name": "article_id",
-          "type": "bigint",
+          "type": "serial",
           "primaryKey": true,
           "notNull": true
         },
@@ -750,13 +118,13 @@
         },
         "title": {
           "name": "title",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "institution": {
           "name": "institution",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
@@ -768,13 +136,20 @@
         },
         "article_url": {
           "name": "article_url",
-          "type": "varchar(2048)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
         "created_at": {
           "name": "created_at",
-          "type": "timestamp with time zone",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
@@ -782,15 +157,15 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "counselor_articles_counselor_id_counselors_counselor_user_id_fk": {
-          "name": "counselor_articles_counselor_id_counselors_counselor_user_id_fk",
+        "counselor_articles_counselor_id_counselors_counselor_id_fk": {
+          "name": "counselor_articles_counselor_id_counselors_counselor_id_fk",
           "tableFrom": "counselor_articles",
           "tableTo": "counselors",
           "columnsFrom": [
             "counselor_id"
           ],
           "columnsTo": [
-            "counselor_user_id"
+            "counselor_id"
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
@@ -798,7 +173,36 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "policies": {},
+      "policies": {
+        "edit-counselor-article-policy": {
+          "name": "edit-counselor-article-policy",
+          "as": "PERMISSIVE",
+          "for": "UPDATE",
+          "to": [
+            "authenticated"
+          ],
+          "using": "(select auth.uid()) = \"counselor_articles\".\"counselor_id\"",
+          "withCheck": "(select auth.uid()) = \"counselor_articles\".\"counselor_id\""
+        },
+        "delete-counselor-article-policy": {
+          "name": "delete-counselor-article-policy",
+          "as": "PERMISSIVE",
+          "for": "DELETE",
+          "to": [
+            "authenticated"
+          ],
+          "using": "(select auth.uid()) = \"counselor_articles\".\"counselor_id\""
+        },
+        "select-counselor-article-policy": {
+          "name": "select-counselor-article-policy",
+          "as": "PERMISSIVE",
+          "for": "SELECT",
+          "to": [
+            "authenticated"
+          ],
+          "using": "(select auth.uid()) = \"counselor_articles\".\"counselor_id\""
+        }
+      },
       "checkConstraints": {},
       "isRLSEnabled": false
     },
@@ -806,12 +210,6 @@
       "name": "counselor_available_methods",
       "schema": "",
       "columns": {
-        "available_method_id": {
-          "name": "available_method_id",
-          "type": "bigint",
-          "primaryKey": true,
-          "notNull": true
-        },
         "counselor_id": {
           "name": "counselor_id",
           "type": "uuid",
@@ -837,27 +235,78 @@
           "primaryKey": false,
           "notNull": true,
           "default": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "counselor_available_methods_counselor_id_counselors_counselor_user_id_fk": {
-          "name": "counselor_available_methods_counselor_id_counselors_counselor_user_id_fk",
+        "counselor_available_methods_counselor_id_counselors_counselor_id_fk": {
+          "name": "counselor_available_methods_counselor_id_counselors_counselor_id_fk",
           "tableFrom": "counselor_available_methods",
           "tableTo": "counselors",
           "columnsFrom": [
             "counselor_id"
           ],
           "columnsTo": [
-            "counselor_user_id"
+            "counselor_id"
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {},
+      "compositePrimaryKeys": {
+        "counselor_available_methods_counselor_id_method_pk": {
+          "name": "counselor_available_methods_counselor_id_method_pk",
+          "columns": [
+            "counselor_id",
+            "method"
+          ]
+        }
+      },
       "uniqueConstraints": {},
-      "policies": {},
+      "policies": {
+        "edit-counselor-method-policy": {
+          "name": "edit-counselor-method-policy",
+          "as": "PERMISSIVE",
+          "for": "UPDATE",
+          "to": [
+            "authenticated"
+          ],
+          "using": "(select auth.uid()) = \"counselor_available_methods\".\"counselor_id\"",
+          "withCheck": "(select auth.uid()) = \"counselor_available_methods\".\"counselor_id\""
+        },
+        "delete-counselor-method-policy": {
+          "name": "delete-counselor-method-policy",
+          "as": "PERMISSIVE",
+          "for": "DELETE",
+          "to": [
+            "authenticated"
+          ],
+          "using": "(select auth.uid()) = \"counselor_available_methods\".\"counselor_id\""
+        },
+        "select-counselor-method-policy": {
+          "name": "select-counselor-method-policy",
+          "as": "PERMISSIVE",
+          "for": "SELECT",
+          "to": [
+            "authenticated"
+          ],
+          "using": "(select auth.uid()) = \"counselor_available_methods\".\"counselor_id\""
+        }
+      },
       "checkConstraints": {},
       "isRLSEnabled": false
     },
@@ -867,7 +316,7 @@
       "columns": {
         "item_id": {
           "name": "item_id",
-          "type": "bigint",
+          "type": "serial",
           "primaryKey": true,
           "notNull": true
         },
@@ -879,7 +328,7 @@
         },
         "title": {
           "name": "title",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -894,19 +343,33 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "counselor_introduction_items_counselor_id_counselors_counselor_user_id_fk": {
-          "name": "counselor_introduction_items_counselor_id_counselors_counselor_user_id_fk",
+        "counselor_introduction_items_counselor_id_counselors_counselor_id_fk": {
+          "name": "counselor_introduction_items_counselor_id_counselors_counselor_id_fk",
           "tableFrom": "counselor_introduction_items",
           "tableTo": "counselors",
           "columnsFrom": [
             "counselor_id"
           ],
           "columnsTo": [
-            "counselor_user_id"
+            "counselor_id"
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
@@ -914,7 +377,36 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "policies": {},
+      "policies": {
+        "edit-counselor-item-policy": {
+          "name": "edit-counselor-item-policy",
+          "as": "PERMISSIVE",
+          "for": "UPDATE",
+          "to": [
+            "authenticated"
+          ],
+          "using": "(select auth.uid()) = \"counselor_introduction_items\".\"counselor_id\"",
+          "withCheck": "(select auth.uid()) = \"counselor_introduction_items\".\"counselor_id\""
+        },
+        "delete-counselor-item-policy": {
+          "name": "delete-counselor-item-policy",
+          "as": "PERMISSIVE",
+          "for": "DELETE",
+          "to": [
+            "authenticated"
+          ],
+          "using": "(select auth.uid()) = \"counselor_introduction_items\".\"counselor_id\""
+        },
+        "select-counselor-item-policy": {
+          "name": "select-counselor-item-policy",
+          "as": "PERMISSIVE",
+          "for": "SELECT",
+          "to": [
+            "authenticated"
+          ],
+          "using": "(select auth.uid()) = \"counselor_introduction_items\".\"counselor_id\""
+        }
+      },
       "checkConstraints": {},
       "isRLSEnabled": false
     },
@@ -922,23 +414,11 @@
       "name": "counselors",
       "schema": "",
       "columns": {
-        "counselor_user_id": {
-          "name": "counselor_user_id",
+        "counselor_id": {
+          "name": "counselor_id",
           "type": "uuid",
           "primaryKey": true,
           "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "profile_image_url": {
-          "name": "profile_image_url",
-          "type": "varchar(2048)",
-          "primaryKey": false,
-          "notNull": false
         },
         "total_counseling_count": {
           "name": "total_counseling_count",
@@ -963,19 +443,19 @@
         },
         "short_introduction": {
           "name": "short_introduction",
-          "type": "varchar(300)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
         "center_name": {
           "name": "center_name",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
         "center_address": {
           "name": "center_address",
-          "type": "varchar(500)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
@@ -998,19 +478,33 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "counselors_counselor_user_id_users_user_id_fk": {
-          "name": "counselors_counselor_user_id_users_user_id_fk",
+        "counselors_counselor_id_profiles_profile_id_fk": {
+          "name": "counselors_counselor_id_profiles_profile_id_fk",
           "tableFrom": "counselors",
-          "tableTo": "users",
+          "tableTo": "profiles",
           "columnsFrom": [
-            "counselor_user_id"
+            "counselor_id"
           ],
           "columnsTo": [
-            "user_id"
+            "profile_id"
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
@@ -1018,7 +512,36 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "policies": {},
+      "policies": {
+        "edit-counselorcounselor-policy": {
+          "name": "edit-counselorcounselor-policy",
+          "as": "PERMISSIVE",
+          "for": "UPDATE",
+          "to": [
+            "authenticated"
+          ],
+          "using": "(select auth.uid()) = \"counselors\".\"counselor_id\"",
+          "withCheck": "(select auth.uid()) = \"counselors\".\"counselor_id\""
+        },
+        "delete-counselor-policy": {
+          "name": "delete-counselor-policy",
+          "as": "PERMISSIVE",
+          "for": "DELETE",
+          "to": [
+            "authenticated"
+          ],
+          "using": "(select auth.uid()) = \"counselors\".\"counselor_id\""
+        },
+        "select-counselor-policy": {
+          "name": "select-counselor-policy",
+          "as": "PERMISSIVE",
+          "for": "SELECT",
+          "to": [
+            "authenticated"
+          ],
+          "using": "(select auth.uid()) = \"counselors\".\"counselor_id\""
+        }
+      },
       "checkConstraints": {},
       "isRLSEnabled": false
     },
@@ -1038,6 +561,13 @@
           "primaryKey": false,
           "notNull": true
         },
+        "role": {
+          "name": "role",
+          "type": "user_role",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
         "avatar_url": {
           "name": "avatar_url",
           "type": "text",
@@ -1050,6 +580,12 @@
           "primaryKey": false,
           "notNull": true,
           "default": false
+        },
+        "deleted_at": {
+          "name": "deleted_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
         },
         "updated_at": {
           "name": "updated_at",
@@ -1117,153 +653,16 @@
       },
       "checkConstraints": {},
       "isRLSEnabled": false
-    },
-    "public.users": {
-      "name": "users",
-      "schema": "",
-      "columns": {
-        "user_id": {
-          "name": "user_id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "role": {
-          "name": "role",
-          "type": "user_role",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "email": {
-          "name": "email",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "nickname": {
-          "name": "nickname",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "avatar_background_color": {
-          "name": "avatar_background_color",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "deleted_at": {
-          "name": "deleted_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "users_user_id_users_id_fk": {
-          "name": "users_user_id_users_id_fk",
-          "tableFrom": "users",
-          "tableTo": "users",
-          "schemaTo": "auth",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "users_email_unique": {
-          "name": "users_email_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
-        },
-        "users_nickname_unique": {
-          "name": "users_nickname_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "nickname"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
     }
   },
   "enums": {
-    "public.age_group_range": {
-      "name": "age_group_range",
-      "schema": "public",
-      "values": [
-        "10-19",
-        "20-29",
-        "30-39",
-        "40-49",
-        "50-59",
-        "60+"
-      ]
-    },
-    "public.application_status": {
-      "name": "application_status",
-      "schema": "public",
-      "values": [
-        "pending_approval",
-        "accepted",
-        "rejected",
-        "canceled_by_client",
-        "awaiting_confirmation"
-      ]
-    },
-    "public.gender_type": {
-      "name": "gender_type",
-      "schema": "public",
-      "values": [
-        "male",
-        "female"
-      ]
-    },
-    "public.payment_status": {
-      "name": "payment_status",
-      "schema": "public",
-      "values": [
-        "pending",
-        "completed",
-        "failed",
-        "refund_processing",
-        "refunded"
-      ]
-    },
     "public.counseling_method": {
       "name": "counseling_method",
       "schema": "public",
       "values": [
         "chat",
         "phone",
-        "video",
-        "visit"
+        "video"
       ]
     },
     "public.user_role": {
