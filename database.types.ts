@@ -226,7 +226,7 @@ export type Database = {
           marketing_consent?: boolean
           name: string
           profile_id: string
-          role: Database["public"]["Enums"]["user_role"]
+          role?: Database["public"]["Enums"]["user_role"]
           updated_at?: string
         }
         Update: {
