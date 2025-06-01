@@ -255,7 +255,7 @@ export function NavigationBar({
         </Link>
         
         {/* Desktop navigation menu (hidden on mobile) */}
-        <div className="hidden h-full items-center gap-1 md:flex">
+        <div className="h-full items-center gap-1 md:flex">
           {/* Main navigation links */}
           {/* <Link
             to="/blog"
@@ -306,7 +306,7 @@ export function NavigationBar({
         </div>
         
         {/* Mobile menu trigger (hidden on desktop) */}
-        <SheetTrigger className="size-6 md:hidden">
+        {/* <SheetTrigger className="size-6 md:hidden">
           <MenuIcon />
         </SheetTrigger>
         <SheetContent>
@@ -348,7 +348,7 @@ export function NavigationBar({
               )}
             </SheetFooter>
           )}
-        </SheetContent>
+        </SheetContent> */}
       </div>
     </nav>
   );
