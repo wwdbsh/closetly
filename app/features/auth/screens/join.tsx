@@ -116,7 +116,7 @@ export async function action({ request }: Route.ActionArgs) {
   // Verify terms of service acceptance
   if (!validData.terms) {
     return data(
-      { error: "You must agree to the terms of service" },
+      { error: "이용약관에 동의해주세요." },
       { status: 400 },
     );
   }
@@ -126,7 +126,7 @@ export async function action({ request }: Route.ActionArgs) {
 
   if (userExists) {
     return data(
-      { error: "There is an account with this email already." },
+      { error: "이미 가입된 이메일입니다." },
       { status: 400 },
     );
   }
@@ -173,83 +173,89 @@ export async function action({ request }: Route.ActionArgs) {
  */
 export default function Join({ actionData }: Route.ComponentProps) {
   // Reference to the form element for resetting after successful submission
-  // const formRef = useRef<HTMLFormElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   
   // Reset the form when registration is successful
-  // useEffect(() => {
-  //   if (actionData && "success" in actionData && actionData.success) {
-  //     formRef.current?.reset();
-  //     formRef.current?.blur();
-  //   }
-  // }, [actionData]);
+  useEffect(() => {
+    if (actionData && "success" in actionData && actionData.success) {
+      formRef.current?.reset();
+      formRef.current?.blur();
+    }
+  }, [actionData]);
   return (
     <div className="flex-1 flex flex-col items-center gap-4 px-10 pt-30">
       <Card
         className="
-          w-full h-[400px] flex-shrink-0 rounded-[50px] bg-white shadow-[0_5px_30px_0_rgba(0,0,0,0.10)] border-none
+          w-full flex-shrink-0 rounded-[50px] bg-white shadow-[0_5px_30px_0_rgba(0,0,0,0.10)] border-none
           flex flex-col justify-between
           px-0 py-10
         "
       >
         <CardHeader className="flex flex-col">
           <CardTitle className="text-xl font-semibold" role="heading">
-            로그인
+            {/* 로그인 */}
+            회원가입
           </CardTitle>
           <CardDescription className="text-base">
-            SNS로 간편하게 로그인해보세요!
+            {/* SNS로 간편하게 로그인해보세요! */}
+            도닥도닥에 오신 것을 환영합니다!
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
-          {/* <Form
+          <Form
             className="flex w-full flex-col gap-5"
             method="post"
             ref={formRef}
-          > */}
-            {/* <div className="flex flex-col items-start space-y-2">
+          >
+            <div className="flex flex-col items-start space-y-2">
               <Label htmlFor="name" className="flex flex-col items-start gap-1">
-                Name
+                {/* Name */}
+                이름
               </Label>
               <Input
                 id="name"
                 name="name"
                 required
                 type="text"
-                placeholder="Nico"
+                placeholder="이름을 입력해주세요"
               />
               {actionData &&
               "fieldErrors" in actionData &&
               actionData.fieldErrors?.name ? (
                 <FormErrors errors={actionData.fieldErrors.name} />
               ) : null}
-            </div> */}
-            {/* <div className="flex flex-col items-start space-y-2">
+            </div>
+            <div className="flex flex-col items-start space-y-2">
               <Label
                 htmlFor="email"
                 className="flex flex-col items-start gap-1"
               >
-                Email
+                {/* Email */}
+                이메일
               </Label>
               <Input
                 id="email"
                 name="email"
                 required
                 type="email"
-                placeholder="nico@supaplate.com"
+                placeholder="이메일을 입력해주세요"
               />
               {actionData &&
               "fieldErrors" in actionData &&
               actionData.fieldErrors?.email ? (
                 <FormErrors errors={actionData.fieldErrors.email} />
               ) : null}
-            </div> */}
-            {/* <div className="flex flex-col items-start space-y-2">
+            </div>
+            <div className="flex flex-col items-start space-y-2">
               <Label
                 htmlFor="password"
                 className="flex flex-col items-start gap-1"
               >
-                Password
+                {/* Password */}
+                비밀번호
                 <small className="text-muted-foreground">
-                  Must be at least 8 characters.
+                  {/* Must be at least 8 characters. */}
+                  8자 이상 입력해주세요.
                 </small>
               </Label>
               <Input
@@ -257,98 +263,107 @@ export default function Join({ actionData }: Route.ComponentProps) {
                 name="password"
                 required
                 type="password"
-                placeholder="Enter your password"
+                placeholder="비밀번호를 입력해주세요"
               />
               {actionData &&
               "fieldErrors" in actionData &&
               actionData.fieldErrors?.password ? (
                 <FormErrors errors={actionData.fieldErrors.password} />
               ) : null}
-            </div> */}
-            {/* <div className="flex flex-col items-start space-y-2">
+            </div>
+            <div className="flex flex-col items-start space-y-2">
               <Label
                 htmlFor="confirmPassword"
                 className="flex flex-col items-start gap-1"
               >
-                Confirm password
+                {/* Confirm password */}
+                비밀번호 확인
               </Label>
               <Input
                 id="confirmPassword"
                 name="confirmPassword"
                 required
                 type="password"
-                placeholder="Confirm your password"
+                placeholder="비밀번호를 다시 입력해주세요"
               />
               {actionData &&
               "fieldErrors" in actionData &&
               actionData.fieldErrors?.confirmPassword ? (
                 <FormErrors errors={actionData.fieldErrors.confirmPassword} />
               ) : null}
-            </div> */}
-            {/* <FormButton label="Create account" className="w-full" /> */}
-            {/* {actionData && "error" in actionData && actionData.error ? (
-              <FormErrors errors={[actionData.error]} />
-            ) : null} */}
+            </div>
 
-            {/* <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2">
               <Checkbox id="marketing" name="marketing" />
               <Label htmlFor="marketing" className="text-muted-foreground">
-                Sign up for marketing emails
+                {/* Sign up for marketing emails */}
+                마케팅 이메일 수신 동의
               </Label>
-            </div> */}
-            {/* <div className="flex items-center gap-2">
-              <Checkbox id="terms" name="terms" checked />
+            </div>
+            <div className="flex items-center gap-2">
+              <Checkbox id="terms" name="terms" />
               <Label htmlFor="terms" className="text-muted-foreground">
                 <span>
-                  I have read and agree to the{" "}
+                  {/* I have read and agree to the{" "} */}
                   <Link
                     to="/legal/terms-of-service"
                     viewTransition
                     className="text-muted-foreground text-underline hover:text-foreground underline transition-colors"
                   >
-                    Terms of Service
+                    {/* Terms of Service */}
+                    이용약관
                   </Link>{" "}
-                  and{" "}
+                  {/* and{" "} */}
+                  및{" "}
                   <Link
                     to="/legal/privacy-policy"
                     viewTransition
                     className="text-muted-foreground hover:text-foreground text-underline underline transition-colors"
                   >
-                    Privacy Policy
-                  </Link>
+                    {/* Privacy Policy */}
+                    개인정보처리방침
+                  </Link>{" "}
+                  약관에 동의합니다.
                 </span>
               </Label>
-            </div> */}
-            {/* {actionData && "success" in actionData && actionData.success ? (
+            </div>
+            <FormButton label="회원가입" className="w-full" />
+            {actionData && "error" in actionData && actionData.error ? (
+              <FormErrors errors={[actionData.error]} />
+            ) : null}
+            {actionData && "success" in actionData && actionData.success ? (
               <Alert className="bg-green-600/20 text-green-700 dark:bg-green-950/20 dark:text-green-600">
                 <CheckCircle2Icon
                   className="size-4"
                   color="oklch(0.627 0.194 149.214)"
                 />
-                <AlertTitle>Account created!</AlertTitle>
+                <AlertTitle>회원가입이 완료되었습니다!</AlertTitle>
                 <AlertDescription className="text-green-700 dark:text-green-600">
-                  Before you can sign in, please verify your email. You can
-                  close this tab.
+                  {/* Before you can sign in, please verify your email. You can
+                  close this tab. */}
+                  이메일 인증 후 로그인해주세요.
                 </AlertDescription>
               </Alert>
-            ) : null} */}
-          {/* </Form> */}
+            ) : null}
+          </Form>
           <SignUpButtons />
         </CardContent>
       </Card>
-      {/* <div className="flex flex-col items-center justify-center text-sm">
+      <div className="flex flex-col items-center justify-center text-sm">
         <p className="text-muted-foreground">
-          Already have an account?{" "}
+          {/* Already have an account?{" "} */}
+          이미 계정이 있으신가요?{" "}
           <Link
             to="/login"
             viewTransition
             data-testid="form-signin-link"
             className="text-muted-foreground hover:text-foreground text-underline underline transition-colors"
           >
-            Sign in
+            {/* Sign in */}
+            로그인
           </Link>
         </p>
-      </div> */}
+      </div>
     </div>
   );
 }

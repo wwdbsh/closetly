@@ -48,7 +48,7 @@ export const profiles = pgTable(
         onDelete: "cascade",
       }),
     name: text().notNull(),
-    role: userRoleEnum().notNull(),
+    role: userRoleEnum().notNull().default("client"),
     avatar_url: text(),
     marketing_consent: boolean("marketing_consent").notNull().default(false),
     deleted_at: timestamp("deleted_at", { withTimezone: true }),

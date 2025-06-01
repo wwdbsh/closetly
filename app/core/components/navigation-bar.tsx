@@ -132,19 +132,19 @@ function AuthButtons() {
   return (
     <>
       {/* Sign in button (less prominent) */}
-      {/* <Button variant="ghost" asChild>
+      <Button className="text-white" variant="ghost" asChild>
         <SheetClose asChild>
           <Link to="/login" viewTransition>
             로그인
           </Link>
         </SheetClose>
-      </Button> */}
+      </Button>
       
       {/* Sign up button (more prominent) */}
       <Button className="text-white" variant="ghost" asChild>
         <SheetClose asChild>
           <Link to="/join" viewTransition>
-            로그인
+            회원가입
           </Link>
         </SheetClose>
       </Button>

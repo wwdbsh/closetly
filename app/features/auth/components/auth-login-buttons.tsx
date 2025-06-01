@@ -171,7 +171,7 @@ export function SignInButtons() {
     <>
       <Divider />
       <SocialLoginButtons />
-      <_SignInButtons />
+      {/* <_SignInButtons /> */}
     </>
   );
 }

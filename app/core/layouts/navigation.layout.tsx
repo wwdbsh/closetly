@@ -21,8 +21,8 @@ export default function NavigationLayout({ loaderData }: Route.ComponentProps) {
         <Suspense fallback={<NavigationBar loading={true} />}>
           <Await resolve={userPromise}>
             {({ data: { user } }) =>
-              // user === null ? (
-              user !== null ? (
+              user === null ? (
+              // user !== null ? (
                 <NavigationBar loading={false} />
               ) : (
                 <NavigationBar

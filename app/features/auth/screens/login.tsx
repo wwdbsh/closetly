@@ -149,14 +149,17 @@ export default function Login({ actionData }: Route.ComponentProps) {
     });
   };
   return (
-    <div className="flex flex-col items-center justify-center gap-4">
+    // <div className="flex flex-col items-center justify-center gap-4">
+    <div className="flex-1 flex flex-col items-center gap-4 px-10 pt-30">
       <Card className="w-full max-w-md">
         <CardHeader className="flex flex-col items-center">
           <CardTitle className="text-2xl font-semibold">
-            Sign into your account
+            {/* Sign into your account */}
+            로그인
           </CardTitle>
           <CardDescription className="text-base">
-            Please enter your details
+            {/* Please enter your details */}
+            이메일과 비밀번호를 입력해주세요.
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
@@ -170,14 +173,15 @@ export default function Login({ actionData }: Route.ComponentProps) {
                 htmlFor="email"
                 className="flex flex-col items-start gap-1"
               >
-                Email
+                {/* Email */}
+                이메일
               </Label>
               <Input
                 id="email"
                 name="email"
                 required
                 type="email"
-                placeholder="i.e nico@supaplate.com"
+                placeholder="이메일을 입력해주세요"
               />
               {actionData &&
               "fieldErrors" in actionData &&
@@ -191,7 +195,8 @@ export default function Login({ actionData }: Route.ComponentProps) {
                   htmlFor="password"
                   className="flex flex-col items-start gap-1"
                 >
-                  Password
+                  {/* Password */}
+                  비밀번호
                 </Label>
                 <Link
                   to="/auth/forgot-password/reset"
@@ -199,7 +204,8 @@ export default function Login({ actionData }: Route.ComponentProps) {
                   tabIndex={-1}
                   viewTransition
                 >
-                  Forgot your password?
+                  {/* Forgot your password? */}
+                  비밀번호를 잊으셨나요?
                 </Link>
               </div>
               <Input
@@ -207,7 +213,7 @@ export default function Login({ actionData }: Route.ComponentProps) {
                 name="password"
                 required
                 type="password"
-                placeholder="Enter your password"
+                placeholder="비밀번호를 입력해주세요"
               />
 
               {actionData &&
@@ -216,20 +222,22 @@ export default function Login({ actionData }: Route.ComponentProps) {
                 <FormErrors errors={actionData.fieldErrors.password} />
               ) : null}
             </div>
-            <FormButton label="Log in" className="w-full" />
+            <FormButton label="로그인" className="w-full" />
             {actionData && "error" in actionData ? (
               actionData.error === "Email not confirmed" ? (
                 <Alert variant="destructive" className="bg-destructive/10">
                   <AlertCircle className="h-4 w-4" />
-                  <AlertTitle>Email not confirmed</AlertTitle>
+                  <AlertTitle>이메일 인증이 필요합니다.</AlertTitle>
                   <AlertDescription className="flex flex-col items-start gap-2">
-                    Before signing in, please verify your email.
+                    {/* Before signing in, please verify your email. */}
+                    이메일 인증 후 로그인해주세요.
                     <Button
                       variant="outline"
                       className="text-foreground flex items-center justify-between gap-2"
                       onClick={onResendClick}
                     >
-                      Resend confirmation email
+                      {/* Resend confirmation email */}
+                      인증 이메일 재전송
                       {fetcher.state === "submitting" ? (
                         <Loader2Icon
                           data-testid="resend-confirmation-email-spinner"
@@ -249,14 +257,16 @@ export default function Login({ actionData }: Route.ComponentProps) {
       </Card>
       <div className="flex flex-col items-center justify-center text-sm">
         <p className="text-muted-foreground">
-          Don't have an account?{" "}
+          {/* Don't have an account?{" "} */}
+          계정이 없으신가요?{" "}
           <Link
             to="/join"
             viewTransition
             data-testid="form-signup-link"
             className="text-muted-foreground hover:text-foreground text-underline underline transition-colors"
           >
-            Sign up
+            {/* Sign up */}
+            회원가입
           </Link>
         </p>
       </div>
