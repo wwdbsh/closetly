@@ -208,6 +208,57 @@ export type Database = {
           },
         ]
       }
+      payments: {
+        Row: {
+          approved_at: string
+          created_at: string
+          metadata: Json
+          order_id: string
+          order_name: string
+          payment_id: number
+          payment_key: string
+          raw_data: Json
+          receipt_url: string
+          requested_at: string
+          status: string
+          total_amount: number
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          approved_at: string
+          created_at?: string
+          metadata: Json
+          order_id: string
+          order_name: string
+          payment_id?: never
+          payment_key: string
+          raw_data: Json
+          receipt_url: string
+          requested_at: string
+          status: string
+          total_amount: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          approved_at?: string
+          created_at?: string
+          metadata?: Json
+          order_id?: string
+          order_name?: string
+          payment_id?: never
+          payment_key?: string
+          raw_data?: Json
+          receipt_url?: string
+          requested_at?: string
+          status?: string
+          total_amount?: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null

@@ -7,7 +7,8 @@ import path from "node:path";
 
 declare module "react-router" {
   interface Future {
-    unstable_middleware: true;
+    // unstable_middleware: true;
+    unstable_middleware: false;
   }
 }
 
