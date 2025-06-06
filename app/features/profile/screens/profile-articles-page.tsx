@@ -28,11 +28,11 @@ const articles = [
   },
 ];
 
-export default function CounselorArticlesPage() {
+export default function ProfileArticlesPage() {
   return (
     <section className="flex flex-col gap-3 px-4 py-6 bg-white">
       {articles.map((article) => (
-        <Link to={`/counselors/articles/${article.id}`} key={article.id}>
+        <Link to={`/profile/articles/${article.id}`} key={article.id}>
           <Card
             key={article.id}
             className="rounded-[10px] border border-[#E0E0E0] bg-white px-4 py-3 shadow-sm gap-2"

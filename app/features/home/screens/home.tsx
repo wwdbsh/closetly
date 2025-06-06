@@ -18,6 +18,23 @@ import { useTranslation } from "react-i18next";
 import CounselorCard from "~/core/components/counselor-card";
 
 import i18next from "~/core/lib/i18next.server";
+import makeServerClient from "~/core/lib/supa-client.server";
+import { getCounselors } from "~/features/users/queries";
+import { z } from "zod";
+import { data } from "react-router";
+
+const CounselorSchema = z.array(z.object({
+  profile_id: z.string(),
+  avatar_url: z.string(),
+  name: z.string(),
+  average_rating: z.number(),
+  center_name: z.string(),
+  short_introduction: z.string(),
+  is_verified: z.boolean(),
+  review_count: z.number(),
+  total_counseling_count: z.number(),
+  years_of_experience: z.number()
+}));
 
 /**
  * Meta function for setting page metadata
@@ -57,11 +74,25 @@ export const meta: Route.MetaFunction = ({ data }) => {
 export async function loader({ request }: Route.LoaderArgs) {
   // Get a translation function for the user's locale from the request
   const t = await i18next.getFixedT(request);
+  const [client] = makeServerClient(request);
+  const counselors = await getCounselors(client);
+
+  const { success, data: parsedData } = CounselorSchema.safeParse(counselors);
+
+  if (!success) {
+    throw data(
+      {
+        error_code: "INVALID_DATA",
+        message: "Invalid data",
+      },
+      { status: 400 }
+    );
+  }
   
-  // Return translated strings for use in both the component and meta function
   return {
     title: t("home.title"),
     subtitle: t("home.subtitle"),
+    counselors: parsedData
   };
 }
 
@@ -165,9 +196,10 @@ const dummyData = [
  * 
  * @returns JSX element representing the home page
  */
-export default function Home() {
+export default function Home({ loaderData }: Route.ComponentProps) {
   // Get the translation function for the current locale
   const { t } = useTranslation();
+  const { counselors } = loaderData;
   
   return (
     <div className="flex flex-col bg-[#FFF]">
@@ -229,10 +261,19 @@ export default function Home() {
       </div>
 
       <ul className="flex flex-col gap-4 px-2 py-4">
-        {dummyData.map((data, index) => (
+        {counselors.map((c, index) => (
           <CounselorCard
             key={index}
-            {...data}
+            profile_id={c.profile_id}
+            name={c.name}
+            avatar_url={c.avatar_url}
+            average_rating={c.average_rating}
+            center_name={c.center_name}
+            is_verified={c.is_verified}
+            review_count={c.review_count}
+            short_introduction={c.short_introduction}
+            total_counseling_count={c.total_counseling_count}
+            years_of_experience={c.years_of_experience}
           />
         ))}
       </ul>

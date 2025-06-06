@@ -8,7 +8,7 @@ const mockCounselors = {
   "1": {
     image: "/ai-humans/human1.png",
     name: "홍길동 상담사",
-    badges: ["10년차", "온라인상담", "인증완료"],
+    badges: ["10년차", "인증완료"],
     totalSessions: "누적 상담 2,000회",
     description: "항상 따뜻한 마음으로 다가가는 상담사, 홍길동입니다.",
     center: "심리상담센터 논현점",
@@ -21,9 +21,10 @@ const mockCounselors = {
 };
 
 
-export default function CounselorOverviewLayout() {
+export default function ProfileOverviewLayout() {
   const { counselorId } = useParams();
-  const counselor = mockCounselors[counselorId as keyof typeof mockCounselors];
+  // const counselor = mockCounselors[counselorId as keyof typeof mockCounselors];
+  const counselor = mockCounselors["1"];
 
   return (
     <div className="w-full min-h-screen flex flex-col">
@@ -84,7 +85,7 @@ export default function CounselorOverviewLayout() {
               isActive ? "text-[#393939] border-b-2 border-[#0C284F]" : "text-[#B2B2B2]"
             )
           }
-          to={`/counselors/${counselorId}/overview`}
+          to={`/profile/${counselorId}/overview`}
         >
           소개
         </NavLink>
@@ -95,7 +96,7 @@ export default function CounselorOverviewLayout() {
               isActive ? "text-[#393939] border-b-2 border-[#0C284F]" : "text-[#B2B2B2]"
             )
           }
-          to={`/counselors/${counselorId}/reviews`}
+          to={`/profile/${counselorId}/reviews`}
         >
           후기
         </NavLink>
@@ -106,7 +107,7 @@ export default function CounselorOverviewLayout() {
               isActive ? "text-[#393939] border-b-2 border-[#0C284F]" : "text-[#B2B2B2]"
             )
           }
-          to={`/counselors/${counselorId}/articles`}
+          to={`/profile/${counselorId}/articles`}
         >
           기사/논문
         </NavLink>
@@ -120,7 +121,7 @@ export default function CounselorOverviewLayout() {
       <div className="flex gap-2 px-5 py-4 bg-white border-t border-gray-200">
         <Button variant="outline" className="flex-1 h-12 rounded-[10px] border border-[#393939] text-[#393939] font-bold">이전</Button>
         <Button className="flex-4 h-12 rounded-[10px] bg-[#0C284F] text-white font-bold" asChild>
-          <Link to={`/counselors/${counselorId}/reservation`}>바로 예약</Link>
+          <Link to={`/profile/${counselorId}/reservation`}>바로 예약</Link>
         </Button>
       </div>
     </div>

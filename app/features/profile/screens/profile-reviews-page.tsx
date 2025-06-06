@@ -16,7 +16,7 @@ const reviews = [
   },
 ];
 
-export default function CounselorReviewsPage() {
+export default function ProfileReviewsPage() {
   return (
     <section className="flex flex-col gap-6 px-5 py-6 bg-white">
       {/* 상단 별점/후기 요약 */}

@@ -1,4 +1,4 @@
-export default function CounselorOverviewPage({}) {
+export default function ProfileOverviewPage({}) {
   return (
     <section className="flex-1 bg-white px-5 py-4 flex flex-col gap-4 overflow-y-auto">
       <div className="bg-[#E6F0FF] text-[#0C284F] rounded-[8px] px-4 py-3 text-sm">

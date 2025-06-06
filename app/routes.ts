@@ -42,6 +42,9 @@ export default [
     ]),
     ...prefix("/cron", [route("/mailer", "features/cron/api/mailer.tsx")]),
     ...prefix("/blog", [route("/og", "features/blog/api/og.tsx")]),
+    ...prefix("/profile", [
+      route("/test-encryption", "features/profile/api/test-encryption.tsx"),
+    ]),
   ]),
 
   layout("core/layouts/navigation.layout.tsx", [
@@ -91,15 +94,15 @@ export default [
         route("/failure", "features/payments/screens/failure.tsx"),
       ]),
     ]),
-    ...prefix("/counselors", [
+    ...prefix("/profile", [
       ...prefix(":counselorId", [
-        index("features/counselors/screens/profile-redirect-page.tsx"),
-        layout("features/counselors/layouts/counselor-overview-layout.tsx", [
-          route("/overview", "features/counselors/screens/counselor-overview-page.tsx"),
-          route("/reviews", "features/counselors/screens/counselor-reviews-page.tsx"),
-          route("/articles", "features/counselors/screens/counselor-articles-page.tsx"),
+        index("features/profile/screens/profile-redirect-page.tsx"),
+        layout("features/profile/layouts/profile-overview-layout.tsx", [
+          route("/overview", "features/profile/screens/profile-overview-page.tsx"),
+          route("/reviews", "features/profile/screens/profile-reviews-page.tsx"),
+          route("/articles", "features/profile/screens/profile-articles-page.tsx"),
         ]),
-        route("/reservation", "features/counselors/screens/session-reservation-page.tsx"),
+        route("/reservation", "features/profile/screens/session-reservation-page.tsx"),
       ]),
     ]),
     ...prefix("/my", [

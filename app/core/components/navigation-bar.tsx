@@ -16,7 +16,7 @@
  * - Authenticated state with user profile information
  * - Unauthenticated state with sign in/sign up buttons
  */
-import { CogIcon, HomeIcon, LogOutIcon, MenuIcon, MessageSquare } from "lucide-react";
+import { CogIcon, HomeIcon, LogOutIcon, MenuIcon, MessageSquare, UserCog } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 
@@ -85,11 +85,21 @@ function UserMenu({
         {/* User information display */}
         <DropdownMenuLabel className="grid flex-1 text-left text-sm leading-tight">
           <span className="truncate font-semibold">{name}</span>
-          <span className="truncate text-xs">@{nickname}</span>
+          {/* <span className="truncate text-xs">@{nickname}</span> */}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         
         {/* Dashboard link */}
+        <DropdownMenuItem asChild>
+          <SheetClose asChild>
+            <Link to="/dashboard" viewTransition>
+              <UserCog className="size-4" />
+              내 정보
+            </Link>
+          </SheetClose>
+        </DropdownMenuItem>
+
+        {/* Chat list link */}
         <DropdownMenuItem asChild>
           <SheetClose asChild>
             <Link to="/my/messages" viewTransition>
