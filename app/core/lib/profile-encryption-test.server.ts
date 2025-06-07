@@ -1,8 +1,8 @@
 /**
- * Profile Encryption Test Utilities
+ * Profile Encryption Test Utilities (Global Version)
  * 
- * This file provides testing functions to validate the profile encryption system.
- * Use these functions to test the encryption/decryption flow before deployment.
+ * This file provides testing functions to validate the profile encryption system
+ * for global use without name dependencies.
  */
 
 import { 
@@ -27,7 +27,6 @@ export async function testBasicEncryption() {
   
   // Test sample data (from seed.sql)
   const sampleCounselor = {
-    name: '홍길동',
     profile_id: '13c8bb1e-f7d4-4823-8185-a36b951f27ed'
   };
   
@@ -54,7 +53,6 @@ export async function testBasicEncryption() {
     if (result && result.profile_id === sampleCounselor.profile_id) {
       console.log(`   ✅ Decryption: PASS`);
       console.log(`   Recovered UUID: ${result.profile_id}`);
-      console.log(`   Recovered Name: ${result.name}`);
     } else {
       console.log(`   ❌ Decryption: FAIL`);
       console.log(`   Expected: ${sampleCounselor.profile_id}`);
@@ -101,15 +99,15 @@ export async function testMultipleCounselors() {
   console.log('👥 Testing Multiple Counselors...\n');
   
   const testCounselors = [
-    { name: '김지훈', profile_id: '067e6162-3b6f-4ae2-a171-2470b63dff00' },
-    { name: '이소영', profile_id: '13c8bb1e-f7d4-4823-8185-a36b951f27ed' },
-    { name: '박민수', profile_id: 'f47ac10b-58cc-4372-a567-0e02b2c3d479' },
+    { profile_id: '067e6162-3b6f-4ae2-a171-2470b63dff00' },
+    { profile_id: '13c8bb1e-f7d4-4823-8185-a36b951f27ed' },
+    { profile_id: 'f47ac10b-58cc-4372-a567-0e02b2c3d479' },
   ];
   
   console.log('Generated slugs:');
   for (const counselor of testCounselors) {
     const slug = generateProfileSlug(counselor);
-    console.log(`   ${counselor.name}: /profile/${slug}`);
+    console.log(`   ${counselor.profile_id} → /profile/${slug}`);
   }
   
   console.log('\n✅ Multiple counselor test completed');
@@ -125,11 +123,11 @@ export async function testEdgeCases() {
   const invalidSlugs = [
     '',
     'invalid',
-    'no-dash',
+    'toolong1234567890',
+    'short',
     '123-456',
-    'valid-name-',
-    '-invalid-start',
-    'special@chars-abc123',
+    'special@chars123',
+    'ABC123XYZ789ABCD!',
   ];
   
   console.log('Testing invalid slug formats:');
@@ -140,10 +138,9 @@ export async function testEdgeCases() {
   
   // Test valid slug formats
   const validSlugs = [
-    '홍길동-abc123',
-    'John Smith-xyz789',
-    '김지훈-A1B2C3',
-    '이소영-def456',
+    'ABC123XYZ789ABCD', // 16 chars
+    'a1b2c3d4e5f6g7h8', // 16 chars
+    'A-B_C1D2E3F4G5H6', // 16 chars with allowed special chars
   ];
   
   console.log('\nTesting valid slug formats:');
@@ -181,10 +178,36 @@ export async function testPerformance() {
 }
 
 /**
- * Runs all tests
+ * Tests global compatibility with various name formats
+ */
+export async function testGlobalCompatibility() {
+  console.log('🌍 Testing Global Compatibility...\n');
+  
+  const globalCounselors = [
+    { profile_id: '067e6162-3b6f-4ae2-a171-2470b63dff00' }, // Korean name would be: 김지훈
+    { profile_id: '13c8bb1e-f7d4-4823-8185-a36b951f27ed' }, // English name would be: John Smith  
+    { profile_id: 'f47ac10b-58cc-4372-a567-0e02b2c3d479' }, // Chinese name would be: 李明
+  ];
+  
+  console.log('Generated language-agnostic slugs:');
+  for (const counselor of globalCounselors) {
+    const slug = generateProfileSlug(counselor);
+    console.log(`   UUID: ${counselor.profile_id}`);
+    console.log(`   Slug: /profile/${slug}`);
+    console.log(`   Length: ${slug.length} characters`);
+    console.log(`   Valid: ${isValidSlugFormat(slug) ? '✅' : '❌'}`);
+    console.log('');
+  }
+  
+  console.log('✅ Global compatibility test completed');
+  console.log('🎯 All slugs are language-independent and work globally!');
+}
+
+/**
+ * Runs all tests including the new global compatibility test
  */
 export async function runAllTests() {
-  console.log('🚀 Running Complete Profile Encryption Test Suite\n');
+  console.log('🚀 Running Complete Profile Encryption Test Suite (Global Version)\n');
   console.log('=' .repeat(60));
   
   try {
@@ -197,6 +220,9 @@ export async function runAllTests() {
     await testMultipleCounselors();
     console.log('\n' + '=' .repeat(60));
     
+    await testGlobalCompatibility();
+    console.log('\n' + '=' .repeat(60));
+    
     await testEdgeCases();
     console.log('\n' + '=' .repeat(60));
     
@@ -204,6 +230,7 @@ export async function runAllTests() {
     console.log('\n' + '=' .repeat(60));
     
     console.log('\n🎉 All tests completed successfully!');
+    console.log('🌍 System is ready for global deployment!');
     
   } catch (error) {
     console.error('\n❌ Test suite failed:', error);
@@ -217,4 +244,5 @@ export {
   testMultipleCounselors as multipleCounselorsTest,
   testEdgeCases as edgeCasesTest,
   testPerformance as performanceTest,
+  testGlobalCompatibility as globalCompatibilityTest,
 };

@@ -18,36 +18,3 @@ export async function getUserProfile(
   }
   return data;
 }
-
-export async function getCounselors(
-  client: SupabaseClient<Database>,
-) {
-  const { data, error } = await client
-    .from("profiles")
-    .select(`
-      profile_id,
-      avatar_url,
-      name,
-      counselors!inner (
-        average_rating,
-        center_name,
-        short_introduction,
-        is_verified,
-        review_count,
-        total_counseling_count,
-        years_of_experience
-      )
-    `)
-    .then(({ data }) => ({
-      data: data?.map(({ counselors, ...rest }) => ({
-        ...rest,
-        ...counselors
-      })),
-      error: null
-    }));
-    
-  if (error) {
-    throw error;
-  }
-  return data;
-}

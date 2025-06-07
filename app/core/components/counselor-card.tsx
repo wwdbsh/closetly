@@ -12,6 +12,7 @@ interface CounselorCardProps {
   short_introduction: string;
   total_counseling_count: number;
   years_of_experience: number;
+  slug?: string; // Add optional slug prop
 }
 
 export default function CounselorCard({
@@ -24,10 +25,14 @@ export default function CounselorCard({
   review_count,
   short_introduction,
   total_counseling_count,
-  years_of_experience
+  years_of_experience,
+  slug
 }: CounselorCardProps) {
+  // Use slug if provided, fallback to profile_id for backward compatibility
+  const profileUrl = slug ? `/profile/${slug}` : `/profile/${profile_id}`;
+  
   return (
-    <Link to={`/profile/${profile_id}`}>
+    <Link to={profileUrl}>
       <div className="flex rounded-[10px] gap-3 w-full">
         {/* 프로필 이미지 */}
         <img

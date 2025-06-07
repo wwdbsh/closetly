@@ -1,3 +1,6 @@
+import type { Route } from "./+types/session-reservation-page";
+import { useLoaderData } from "react-router";
+import { getCounselorFromSlug } from "~/core/lib/profile-encryption.server";
 import { Button } from "~/core/components/ui/button";
 import { Input } from "~/core/components/ui/input";
 import { Textarea } from "~/core/components/ui/textarea";
@@ -9,7 +12,24 @@ import { ToggleGroup, ToggleGroupItem } from "~/core/components/ui/toggle-group"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "~/core/components/ui/dialog";
 import { BlurFade } from "components/magicui/blur-fade";
 
+export async function loader({ params }: Route.LoaderArgs) {
+  const { slug } = params;
+  
+  // Validate that the slug corresponds to a real counselor
+  const counselor = await getCounselorFromSlug(slug);
+  
+  if (!counselor) {
+    throw new Response("Counselor not found", { status: 404 });
+  }
+  
+  return {
+    counselor,
+    slug,
+  };
+}
+
 export default function SessionReservationPage() {
+  const { counselor, slug } = useLoaderData<typeof loader>();
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
@@ -67,7 +87,7 @@ export default function SessionReservationPage() {
       <BlurFade>
         <Card className="w-full max-w-md mx-auto">
           <CardHeader>
-            <CardTitle>상담 예약</CardTitle>
+            <CardTitle>상담사 예약</CardTitle>
           </CardHeader>
           <CardContent>
             <form className="flex flex-col gap-4">

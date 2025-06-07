@@ -1,0 +1,2 @@
+ALTER POLICY "select-counselor-article-policy" ON "counselor_articles" TO authenticated USING (true);--> statement-breakpoint
+ALTER POLICY "select-counselor-item-policy" ON "counselor_introduction_items" TO authenticated USING (true);

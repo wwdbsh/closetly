@@ -36,6 +36,13 @@ export type Database = {
             foreignKeyName: "clients_client_id_profiles_profile_id_fk"
             columns: ["client_id"]
             isOneToOne: true
+            referencedRelation: "counselor_view"
+            referencedColumns: ["profile_id"]
+          },
+          {
+            foreignKeyName: "clients_client_id_profiles_profile_id_fk"
+            columns: ["client_id"]
+            isOneToOne: true
             referencedRelation: "profiles"
             referencedColumns: ["profile_id"]
           },
@@ -203,6 +210,13 @@ export type Database = {
             foreignKeyName: "counselors_counselor_id_profiles_profile_id_fk"
             columns: ["counselor_id"]
             isOneToOne: true
+            referencedRelation: "counselor_view"
+            referencedColumns: ["profile_id"]
+          },
+          {
+            foreignKeyName: "counselors_counselor_id_profiles_profile_id_fk"
+            columns: ["counselor_id"]
+            isOneToOne: true
             referencedRelation: "profiles"
             referencedColumns: ["profile_id"]
           },
@@ -294,7 +308,24 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      counselor_view: {
+        Row: {
+          avatar_url: string | null
+          average_rating: number | null
+          center_address: string | null
+          center_name: string | null
+          introduction_greeting: string | null
+          is_verified: boolean | null
+          marketing_consent: boolean | null
+          name: string | null
+          profile_id: string | null
+          review_count: number | null
+          short_introduction: string | null
+          total_counseling_count: number | null
+          years_of_experience: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never

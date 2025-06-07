@@ -1,22 +1,42 @@
 import { StarIcon } from "lucide-react";
+import type { Route } from "./+types/profile-reviews-page";
+import { useLoaderData } from "react-router";
+import { getCounselorFromSlug } from "~/core/lib/profile-encryption.server";
 import { Avatar, AvatarFallback, AvatarImage } from "~/core/components/ui/avatar";
 
-const reviews = [
-  {
-    id: 1,
-    date: "25.05.21",
-    score: 5,
-    content: "어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고",
-  },
-  {
-    id: 2,
-    date: "25.05.19",
-    score: 5,
-    content: "어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고",
-  },
-];
+export async function loader({ params }: Route.LoaderArgs) {
+  const { slug } = params;
+  
+  // Validate that the slug corresponds to a real counselor
+  const counselor = await getCounselorFromSlug(slug);
+  
+  if (!counselor) {
+    throw new Response("Counselor not found", { status: 404 });
+  }
+  
+  return {
+    counselor,
+    slug,
+    // TODO: 실제 리뷰 데이터 가져오기
+    reviews: [
+      {
+        id: 1,
+        date: "25.05.21",
+        score: 5,
+        content: "정말 도움이 많이 되었습니다. 친절하고 전문적인 상담으로 마음의 짐을 덜 수 있었어요.",
+      },
+      {
+        id: 2,
+        date: "25.05.19",
+        score: 5,
+        content: "처음 상담받아봤는데 생각보다 편안했습니다. 상담사님이 잘 들어주셔서 좋았어요.",
+      },
+    ],
+  };
+}
 
 export default function ProfileReviewsPage() {
+  const { counselor, reviews } = useLoaderData<typeof loader>();
   return (
     <section className="flex flex-col gap-6 px-5 py-6 bg-white">
       {/* 상단 별점/후기 요약 */}

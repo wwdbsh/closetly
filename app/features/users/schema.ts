@@ -22,7 +22,6 @@ import {
   primaryKey,
   serial,
 } from "drizzle-orm/pg-core";
-// import { counselingSessions } from "../counselors/schema";
 
 // enum 정의
 export const userRoleEnum = pgEnum("user_role", ["client", "counselor"]);
@@ -178,7 +177,7 @@ export const counselorAvailableMethods = pgTable("counselor_available_methods", 
     for: "select",
     to: authenticatedRole,
     as: "permissive",
-    using: sql`${authUid} = ${table.counselor_id}`,
+    using: sql`true`,
   }),
 ]);
 
@@ -210,7 +209,7 @@ export const counselorIntroductionItems = pgTable("counselor_introduction_items"
     for: "select",
     to: authenticatedRole,
     as: "permissive",
-    using: sql`${authUid} = ${table.counselor_id}`,
+    using: sql`true`,
   }),
 ]);
 
@@ -243,7 +242,7 @@ export const counselorArticles = pgTable("counselor_articles", {
     for: "select",
     to: authenticatedRole,
     as: "permissive",
-    using: sql`${authUid} = ${table.counselor_id}`,
+    using: sql`true`,
   }),
 ]);
 

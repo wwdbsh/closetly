@@ -1,0 +1,1 @@
+ALTER POLICY "select-counselor-method-policy" ON "counselor_available_methods" TO authenticated USING (true);

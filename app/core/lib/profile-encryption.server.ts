@@ -1,22 +1,24 @@
 /**
- * Profile URL Encryption System
+ * Profile URL Encryption System (Global Version)
  * 
  * This module provides secure encryption/decryption functions for generating
  * user-friendly URLs while protecting internal profile IDs.
  * 
  * Key Features:
- * - AES-256-GCM encryption for security
+ * - Name-less slugs for global compatibility
+ * - SHA-256 hash-based encryption for security
  * - URL-safe Base64 encoding
  * - Deterministic encryption for consistent URLs
- * - Protection against timing attacks
+ * - Support for multilingual names (Korean, English, Chinese, etc.)
  */
 
+import { createHash } from "crypto";
 import db from "~/core/db/drizzle-client.server";
 
 // Configuration
 const CONFIG = {
   SECRET_KEY: process.env.PROFILE_ENCRYPT_KEY || 'default-32-char-secret-key-change-me!',
-  SLUG_LENGTH: 12, // Length of the encrypted part in URL
+  SLUG_LENGTH: 16, // Increased length for better uniqueness without names
 } as const;
 
 /**
@@ -41,16 +43,13 @@ export function validateEncryptionKey(): boolean {
  * Encrypts a profile UUID into a URL-safe short string
  * 
  * @param uuid - The profile UUID to encrypt
- * @returns URL-safe encrypted string
+ * @returns URL-safe encrypted string (16 characters)
  */
 export function encryptProfileId(uuid: string): string {
   try {
-    // Create a simple hash-based approach for consistent results
-    const crypto = require('crypto');
-    
     // Create a deterministic hash using the secret key and UUID
     const combined = `${CONFIG.SECRET_KEY}:${uuid}`;
-    const hash = crypto.createHash('sha256').update(combined).digest('hex');
+    const hash = createHash('sha256').update(combined).digest('hex');
     
     // Convert to URL-safe Base64 and trim to desired length
     const urlSafe = Buffer.from(hash, 'hex')
@@ -69,31 +68,19 @@ export function encryptProfileId(uuid: string): string {
 
 /**
  * Finds a profile UUID by matching encrypted slug against all counselors
- * This method is more reliable than direct decryption
  * 
  * @param encryptedSlug - The encrypted slug from URL
- * @param name - The counselor name from URL (for optimization)
  * @returns The matching profile UUID or null
  */
-export async function decryptProfileId(encryptedSlug: string, name?: string): Promise<string | null> {
+export async function decryptProfileId(encryptedSlug: string): Promise<string | null> {
   try {
     // Import Drizzle ORM and use raw SQL to avoid schema import issues
     const { sql } = await import("drizzle-orm");
     
-    // If name is provided, query only counselors with that name for better performance
-    let counselors;
-    
-    if (name) {
-      // Query counselors with the specific name using raw SQL
-      counselors = await db.execute(
-        sql`SELECT profile_id, name FROM profiles WHERE name = ${name} AND role = 'counselor' LIMIT 10`
-      );
-    } else {
-      // Fallback: query all counselors (less efficient)
-      counselors = await db.execute(
-        sql`SELECT profile_id, name FROM profiles WHERE role = 'counselor' LIMIT 100`
-      );
-    }
+    // Query all counselors to test against the encrypted slug
+    const counselors = await db.execute(
+      sql`SELECT profile_id FROM profiles WHERE role = 'counselor' LIMIT 1000`
+    );
     
     // Test each counselor to see if their encrypted ID matches
     for (const counselor of counselors) {
@@ -111,49 +98,37 @@ export async function decryptProfileId(encryptedSlug: string, name?: string): Pr
 }
 
 /**
- * Generates a complete profile URL slug in the format "name-encryptedId"
+ * Generates a complete profile URL slug using only encrypted ID
  * 
- * @param counselor - Counselor object with name and profile_id
- * @returns URL slug string
+ * @param counselor - Counselor object with profile_id
+ * @returns URL slug string (e.g., "a7b8c9d2e4f5x1y2")
  */
-export function generateProfileSlug(counselor: { name: string; profile_id: string }): string {
-  const encryptedId = encryptProfileId(counselor.profile_id);
-  return `${counselor.name}-${encryptedId}`;
+export function generateProfileSlug(counselor: { profile_id: string }): string {
+  return encryptProfileId(counselor.profile_id);
 }
 
 /**
  * Parses a profile slug and extracts counselor information
  * 
- * @param slug - Complete URL slug (e.g., "김지훈-a7b8c9d2e4f5")
- * @returns Object with name and profile_id, or null if invalid
+ * @param slug - Complete URL slug (e.g., "a7b8c9d2e4f5x1y2")
+ * @returns Object with profile_id, or null if invalid
  */
 export async function getCounselorFromSlug(slug: string): Promise<{
-  name: string;
   profile_id: string;
 } | null> {
   try {
-    // Parse the slug to extract name and encrypted ID
-    const lastDashIndex = slug.lastIndexOf('-');
-    if (lastDashIndex === -1) {
+    // Validate slug format (should be 16 characters, alphanumeric with - and _)
+    if (!isValidSlugFormat(slug)) {
       throw new Error('Invalid slug format');
     }
     
-    const name = slug.substring(0, lastDashIndex);
-    const encryptedId = slug.substring(lastDashIndex + 1);
-    
-    // Validate inputs
-    if (!name || !encryptedId) {
-      throw new Error('Invalid slug components');
-    }
-    
-    // Decrypt the profile ID
-    const profileId = await decryptProfileId(encryptedId, name);
+    // Decrypt the profile ID directly
+    const profileId = await decryptProfileId(slug);
     if (!profileId) {
       return null;
     }
     
     return {
-      name,
       profile_id: profileId,
     };
   } catch (error) {
@@ -163,65 +138,15 @@ export async function getCounselorFromSlug(slug: string): Promise<{
 }
 
 /**
- * Validates that a slug is properly formatted
+ * Validates that a slug is properly formatted for global use
  * 
  * @param slug - The slug to validate
  * @returns true if valid format
  */
 export function isValidSlugFormat(slug: string): boolean {
-  // Basic format validation: should contain at least one dash
-  // and encrypted part should be alphanumeric with - and _
-  const parts = slug.split('-');
-  if (parts.length < 2) return false;
-  
-  const encryptedPart = parts[parts.length - 1];
-  const namePattern = /^[가-힣a-zA-Z\s]+$/; // Korean, English, spaces
-  const encryptedPattern = /^[A-Za-z0-9_-]+$/;
-  
-  const name = parts.slice(0, -1).join('-');
-  
-  return namePattern.test(name) && encryptedPattern.test(encryptedPart);
-}
-
-/**
- * Helper function to get counselor data by profile ID
- * This is used internally for generating URLs and validating access
- * 
- * @param profileId - The profile UUID
- * @returns Counselor data or null
- */
-export async function getCounselorByProfileId(profileId: string) {
-  try {
-    // Use raw SQL to avoid schema import issues
-    const { sql } = await import("drizzle-orm");
-    
-    const result = await db.execute(
-      sql`
-        SELECT 
-          p.profile_id,
-          p.name,
-          p.role,
-          c.counselor_id,
-          c.short_introduction,
-          c.years_of_experience,
-          c.average_rating,
-          c.review_count,
-          c.center_name,
-          c.center_address,
-          c.introduction_greeting,
-          c.is_verified
-        FROM profiles p
-        LEFT JOIN counselors c ON p.profile_id = c.counselor_id
-        WHERE p.profile_id = ${profileId}
-        LIMIT 1
-      `
-    );
-    
-    return result[0] || null;
-  } catch (error) {
-    console.error('Error fetching counselor by profile ID:', error);
-    return null;
-  }
+  // Should be exactly 16 characters, alphanumeric with - and _
+  const pattern = /^[A-Za-z0-9_-]{16}$/;
+  return pattern.test(slug);
 }
 
 /**
@@ -246,8 +171,7 @@ export async function generateSlugsForAllCounselors(): Promise<Array<{
       profile_id: counselor.profile_id,
       name: counselor.name,
       slug: generateProfileSlug({
-        profile_id: counselor.profile_id,
-        name: counselor.name
+        profile_id: counselor.profile_id
       }),
     }));
   } catch (error) {
@@ -258,7 +182,6 @@ export async function generateSlugsForAllCounselors(): Promise<Array<{
 
 // Type definitions for better TypeScript support
 export type CounselorSlugData = {
-  name: string;
   profile_id: string;
 };
 

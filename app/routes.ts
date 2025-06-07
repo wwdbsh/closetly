@@ -95,7 +95,7 @@ export default [
       ]),
     ]),
     ...prefix("/profile", [
-      ...prefix(":counselorId", [
+      ...prefix(":slug", [
         index("features/profile/screens/profile-redirect-page.tsx"),
         layout("features/profile/layouts/profile-overview-layout.tsx", [
           route("/overview", "features/profile/screens/profile-overview-page.tsx"),
@@ -108,7 +108,7 @@ export default [
     ...prefix("/my", [
       ...prefix("/messages", [
         index("features/users/screens/message-list-page.tsx"),
-        route("/:counselorId", "features/users/screens/message-page.tsx"),
+        route("/:slug", "features/users/screens/message-page.tsx"),
       ])
     ])
   ]),
